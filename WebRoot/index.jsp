@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							{alert("用户名和密码不能为空");}
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
 					function (data) {
-						if(data=="nona"){alert("无此用户请核实，请核实用户名！");}
+						if(data=="nona"){alert("无此用户，请核实用户名！");}
 						if(data=="error"){alert($("#username").val()+",你的密码有误！");}
 						if(data=="ok"){
 										alert($("#username").val()+",欢迎你的登录！");
@@ -43,14 +43,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
        	<div data-role="fieldcontain">
-       		<label for="text-1">用户名:</label>
        		<input name="username" id="username"
-       			data-clear-btn="true" value="" type="text" data-inline="true" />
+       			data-clear-btn="true" value="" type="text" data-inline="true"  placeholder="用户名..."/>
        	</div>
        	<div data-role="fieldcontain">
-       		<label for="text-1">密 码:</label>
        		<input name="password" id="password"
-       			data-clear-btn="true" value="" type="text" data-inline="true" />
+       			data-clear-btn="true" value="" type="text" data-inline="true"  placeholder="密码..."/>
        	</div>
        	<div data-role="controlgroup" data-type="horizontal">
        	<a href="" id="new" data-role="button"

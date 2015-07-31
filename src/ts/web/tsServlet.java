@@ -48,13 +48,10 @@ public class tsServlet extends HttpServlet {
 				cusDao.save(cus);
 				ts.commit();
 				session.close();
-				System.out.println("保存成功");
 				response.getWriter().write("保存成功");
 			}
 			// 登录
 		} else if (type.equals("up")) {
-			System.out.println(cusDao.findByName(username).size());
-			System.out.println(cusDao.findByName(username).size() == 0);
 			if (cusDao.findByName(username).size() == 0) {
 				response.getWriter().write("nona");
 			} else if (cusDao.findByName(username).size() != 0) {
