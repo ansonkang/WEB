@@ -12,10 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	$(document).ready(function(){
 		$("#submit").click(function(){
-			if($("#username").val()==""||$("#password").val()=="")
-				{alert("用户名和密码不能为空");}
-			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val()},function (data) {alert(data);});}
-			
+			$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val()},function (data) { alert($("#password").val()); });
 		});
 	});
 </script>
