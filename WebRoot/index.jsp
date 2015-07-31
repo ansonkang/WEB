@@ -11,11 +11,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#submit").click(function(){
+		$("#new").click(function(){
 			if($("#username").val()==""||$("#password").val()=="")
 				{alert("用户名和密码不能为空");}
-			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val()},function (data) {alert(data);});}
+			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"new"},function (data) {alert(data);});}
 			
+		});
+		$("#up").click(function(){
+						if($("#username").val()==""||$("#password").val()=="")
+							{alert("用户名和密码不能为空");}
+			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
+					function (data) {
+						if(data=="error"){alert($("#username").val()+",你的密码有误！");}
+						if(data="ok"){
+										alert($("#username").val()+",欢迎你的登录！");
+										location.href="./table.jsp";
+										}
+									});
+				}
 		});
 	});
 </script>
@@ -28,19 +41,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <title>person table</title>
 </head>
 <body>
-       <form target="hiddenIFrame">
+
        	<div data-role="fieldcontain">
        		<label for="text-1">用户名:</label>
        		<input name="username" id="username"
-       			data-clear-btn="true" value="" type="text" data-inline="true"/>
+       			data-clear-btn="true" value="" type="text" data-inline="true" />
        	</div>
        	<div data-role="fieldcontain">
-       		<label for="text-1">密   码:   </label>
-       		<input name="password" id="password" data-clear-btn="true"
-       			value="" type="text" data-inline="true"/>
+       		<label for="text-1">密 码:</label>
+       		<input name="password" id="password"
+       			data-clear-btn="true" value="" type="text" data-inline="true" />
        	</div>
-       	<a href="" id="submit" data-role="button" data-inline="true">提交</a>
+       	<a href="" id="new" data-role="button"
+       		data-inline="true">
+       		注册
+       	</a><br>
+       	<a href="" id="up" data-role="button" data-inline="true">登录</a>
        </form>
-       <iframe style="display:none" name="hiddenIFrame" id="hiddenIFrame"/>
 </body>
 </html>
