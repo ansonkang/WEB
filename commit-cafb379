@@ -1,0 +1,755 @@
+commit cafb3795ac9eedd2daafc442fb73988671d260fd
+Author: ansonkang <kangcs.xm@gmail.com>
+Date:   Thu Jul 30 17:39:58 2015 +0800
+
+    鐧诲綍绐楀彛璁剧疆锛屽鍔爃ibernat鐩稿叧閰嶇疆
+
+diff --git a/.classpath b/.classpath
+index b4a86a5..f45deda 100644
+--- a/.classpath
++++ b/.classpath
+@@ -1,23 +1,29 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <classpath>
+ 	<classpathentry kind="src" path="src"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+-		<attributes>
+-			<attribute name="owner.project.facets" value="java"/>
+-		</attributes>
+-	</classpathentry>
+-	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_6.0">
++	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
++	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
++	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/com.genuitec.embedded.tomcat.runtime.v70">
+ 		<attributes>
+ 			<attribute name="owner.project.facets" value="jst.web"/>
+ 		</attributes>
+ 	</classpathentry>
+-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+ 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.jstl_1.2.1">
+ 		<attributes>
+ 			<attribute name="org.eclipse.jst.component.dependency" value="WEB-INF/lib"/>
+ 			<attribute name="owner.project.facets" value="jst.web.jstl"/>
+ 		</attributes>
+ 	</classpathentry>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
++		<attributes>
++			<attribute name="owner.project.facets" value="java"/>
++		</attributes>
++	</classpathentry>
++	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.hibernate_4.1">
++		<attributes>
++			<attribute name="org.eclipse.jst.component.dependency" value="WEB-INF/lib"/>
++			<attribute name="owner.project.facets" value="me.hibernate"/>
++		</attributes>
++	</classpathentry>
+ 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+ </classpath>
+diff --git a/.myhibernatedata b/.myhibernatedata
+new file mode 100644
+index 0000000..28e5cc8
+--- /dev/null
++++ b/.myhibernatedata
+@@ -0,0 +1,21 @@
++#MyEclipse Hibernate Properties
++#Thu Jul 30 15:16:46 CST 2015
++genBasicCompId=false
++sessionFactoryName=Hibernate.HibernateSessionFactory
++profile=
++daoSFId=
++jndiPath=
++detectM2M=false
++reStrategyClass=
++detectO2O=false
++springDaoFile=
++useJavaTypes=true
++keyGenerator=native
++genVersionTag=false
++sessionFactoryId=
++basePersistenceClass=
++genAnnotations=false
++reSettingsFile=
++configFile=/WEB/src/hibernate.cfg.xml
++createConfigFile=true
++baseDaoClass=BaseHibernateDAO
+diff --git a/.settings/com.genuitec.runtime.libraries.xml b/.settings/com.genuitec.runtime.libraries.xml
+new file mode 100644
+index 0000000..7239c0f
+--- /dev/null
++++ b/.settings/com.genuitec.runtime.libraries.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<project>
++  <add-on id="hibernate.extra"/>
++</project>
+diff --git a/.settings/org.eclipse.wst.common.project.facet.core.xml b/.settings/org.eclipse.wst.common.project.facet.core.xml
+index 2467ea3..4c2b51e 100644
+--- a/.settings/org.eclipse.wst.common.project.facet.core.xml
++++ b/.settings/org.eclipse.wst.common.project.facet.core.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <faceted-project>
+-  <runtime name="com.genuitec.runtime.generic.jee60"/>
++  <runtime name="com.genuitec.embedded.tomcat.runtime.v70"/>
+   <fixed facet="jst.web"/>
+   <fixed facet="wst.jsdt.web"/>
+   <fixed facet="java"/>
+@@ -8,4 +8,5 @@
+   <installed facet="jst.web" version="3.0"/>
+   <installed facet="jst.web.jstl" version="1.2.1"/>
+   <installed facet="wst.jsdt.web" version="1.0"/>
++  <installed facet="me.hibernate" version="4.1"/>
+ </faceted-project>
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/HibernateSessionFactory.class b/WebRoot/WEB-INF/classes/Hibernate/HibernateSessionFactory.class
+new file mode 100644
+index 0000000..f031019
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/HibernateSessionFactory.class differ
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/package-info.class b/WebRoot/WEB-INF/classes/Hibernate/package-info.class
+new file mode 100644
+index 0000000..977bdd3
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/package-info.class differ
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/user/AbstractCus.class b/WebRoot/WEB-INF/classes/Hibernate/user/AbstractCus.class
+new file mode 100644
+index 0000000..26f8dd3
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/user/AbstractCus.class differ
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/user/BaseHibernateDAO.class b/WebRoot/WEB-INF/classes/Hibernate/user/BaseHibernateDAO.class
+new file mode 100644
+index 0000000..252f7ae
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/user/BaseHibernateDAO.class differ
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/user/Cus.class b/WebRoot/WEB-INF/classes/Hibernate/user/Cus.class
+new file mode 100644
+index 0000000..7aa2df5
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/user/Cus.class differ
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/user/Cus.hbm.xml b/WebRoot/WEB-INF/classes/Hibernate/user/Cus.hbm.xml
+new file mode 100644
+index 0000000..d495bab
+--- /dev/null
++++ b/WebRoot/WEB-INF/classes/Hibernate/user/Cus.hbm.xml
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
++"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
++<!-- 
++    Mapping file autogenerated by MyEclipse Persistence Tools
++-->
++<hibernate-mapping>
++    <class name="Hibernate.user.Cus" table="cus" catalog="test">
++        <id name="id" type="java.lang.Integer">
++            <column name="id" />
++            <generator class="native" />
++        </id>
++        <property name="name" type="java.lang.String">
++            <column name="name" length="45" not-null="true" />
++        </property>
++        <property name="psWord" type="java.lang.String">
++            <column name="psWord" length="45" />
++        </property>
++    </class>
++</hibernate-mapping>
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/user/CusDAO.class b/WebRoot/WEB-INF/classes/Hibernate/user/CusDAO.class
+new file mode 100644
+index 0000000..4655e74
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/user/CusDAO.class differ
+diff --git a/WebRoot/WEB-INF/classes/Hibernate/user/IBaseHibernateDAO.class b/WebRoot/WEB-INF/classes/Hibernate/user/IBaseHibernateDAO.class
+new file mode 100644
+index 0000000..dc079a2
+Binary files /dev/null and b/WebRoot/WEB-INF/classes/Hibernate/user/IBaseHibernateDAO.class differ
+diff --git a/WebRoot/WEB-INF/classes/hibernate.cfg.xml b/WebRoot/WEB-INF/classes/hibernate.cfg.xml
+new file mode 100644
+index 0000000..d430ec0
+--- /dev/null
++++ b/WebRoot/WEB-INF/classes/hibernate.cfg.xml
+@@ -0,0 +1,27 @@
++<?xml version='1.0' encoding='UTF-8'?>
++<!DOCTYPE hibernate-configuration PUBLIC
++          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
++          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
++<!-- Generated by MyEclipse Hibernate Tools.                   -->
++<hibernate-configuration>
++
++	<session-factory>
++		<property name="dialect">
++			org.hibernate.dialect.MySQLDialect
++		</property>
++		<property name="connection.url">
++			jdbc:mysql://192.168.0.51:3306/test
++		</property>
++		<property name="connection.username">sa</property>
++		<property name="connection.password">16961055@pg@</property>
++		<property name="connection.driver_class">
++			com.mysql.jdbc.Driver
++		</property>
++		<property name="myeclipse.connection.profile">
++			mysqlDrive
++		</property>
++		<mapping resource="Hibernate/user/Cus.hbm.xml" />
++
++	</session-factory>
++
++</hibernate-configuration>
+\ No newline at end of file
+diff --git a/WebRoot/WEB-INF/classes/ts/web/tsServlet.class b/WebRoot/WEB-INF/classes/ts/web/tsServlet.class
+index 4aad064..0484a75 100644
+Binary files a/WebRoot/WEB-INF/classes/ts/web/tsServlet.class and b/WebRoot/WEB-INF/classes/ts/web/tsServlet.class differ
+diff --git a/WebRoot/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar b/WebRoot/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar
+new file mode 100644
+index 0000000..0170c3e
+Binary files /dev/null and b/WebRoot/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar differ
+diff --git a/WebRoot/index.jsp b/WebRoot/index.jsp
+index 55f29bc..802aa8f 100644
+--- a/WebRoot/index.jsp
++++ b/WebRoot/index.jsp
+@@ -12,7 +12,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
+ 
+ 	$(document).ready(function(){
+ 		$("#submit").click(function(){
+-			$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val()},function (data) { alert($("#password").val()); });
++			if($("#username").val()==""||$("#password").val()=="")
++				{alert("鐢ㄦ埛鍚嶅拰瀵嗙爜涓嶈兘涓虹┖");}
++			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val()},function (data) {alert(data);});}
++			
+ 		});
+ 	});
+ </script>
+diff --git a/src/Hibernate/HibernateSessionFactory.java b/src/Hibernate/HibernateSessionFactory.java
+new file mode 100644
+index 0000000..1faad48
+--- /dev/null
++++ b/src/Hibernate/HibernateSessionFactory.java
+@@ -0,0 +1,109 @@
++package Hibernate;
++
++import org.hibernate.HibernateException;
++import org.hibernate.Session;
++import org.hibernate.cfg.Configuration;
++import org.hibernate.service.ServiceRegistry;
++import org.hibernate.service.ServiceRegistryBuilder;
++
++/**
++ * Configures and provides access to Hibernate sessions, tied to the
++ * current thread of execution.  Follows the Thread Local Session
++ * pattern, see {@link http://hibernate.org/42.html }.
++ */
++public class HibernateSessionFactory {
++
++    /** 
++     * Location of hibernate.cfg.xml file.
++     * Location should be on the classpath as Hibernate uses  
++     * #resourceAsStream style lookup for its configuration file. 
++     * The default classpath location of the hibernate config file is 
++     * in the default package. Use #setConfigFile() to update 
++     * the location of the configuration file for the current session.   
++     */
++	private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
++    private static org.hibernate.SessionFactory sessionFactory;
++	
++    private static Configuration configuration = new Configuration();
++    private static ServiceRegistry serviceRegistry; 
++
++	static {
++    	try {
++			configuration.configure();
++			serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
++			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
++		} catch (Exception e) {
++			System.err.println("%%%% Error Creating SessionFactory %%%%");
++			e.printStackTrace();
++		}
++    }
++    private HibernateSessionFactory() {
++    }
++	
++	/**
++     * Returns the ThreadLocal Session instance.  Lazy initialize
++     * the <code>SessionFactory</code> if needed.
++     *
++     *  @return Session
++     *  @throws HibernateException
++     */
++    public static Session getSession() throws HibernateException {
++        Session session = (Session) threadLocal.get();
++
++		if (session == null || !session.isOpen()) {
++			if (sessionFactory == null) {
++				rebuildSessionFactory();
++			}
++			session = (sessionFactory != null) ? sessionFactory.openSession()
++					: null;
++			threadLocal.set(session);
++		}
++
++        return session;
++    }
++
++	/**
++     *  Rebuild hibernate session factory
++     *
++     */
++	public static void rebuildSessionFactory() {
++		try {
++			configuration.configure();
++			serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
++			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
++		} catch (Exception e) {
++			System.err.println("%%%% Error Creating SessionFactory %%%%");
++			e.printStackTrace();
++		}
++	}
++
++	/**
++     *  Close the single hibernate session instance.
++     *
++     *  @throws HibernateException
++     */
++    public static void closeSession() throws HibernateException {
++        Session session = (Session) threadLocal.get();
++        threadLocal.set(null);
++
++        if (session != null) {
++            session.close();
++        }
++    }
++
++	/**
++     *  return session factory
++     *
++     */
++	public static org.hibernate.SessionFactory getSessionFactory() {
++		return sessionFactory;
++	}
++	/**
++     *  return hibernate configuration
++     *
++     */
++	public static Configuration getConfiguration() {
++		return configuration;
++	}
++
++}
+\ No newline at end of file
+diff --git a/src/Hibernate/package-info.java b/src/Hibernate/package-info.java
+new file mode 100644
+index 0000000..e4fe375
+--- /dev/null
++++ b/src/Hibernate/package-info.java
+@@ -0,0 +1,8 @@
++/**
++ * 
++ */
++/**
++ * @author Administrator
++ *
++ */
++package Hibernate;
+\ No newline at end of file
+diff --git a/src/Hibernate/user/AbstractCus.java b/src/Hibernate/user/AbstractCus.java
+new file mode 100644
+index 0000000..3d55310
+--- /dev/null
++++ b/src/Hibernate/user/AbstractCus.java
+@@ -0,0 +1,59 @@
++package Hibernate.user;
++
++/**
++ * AbstractCus entity provides the base persistence definition of the Cus
++ * entity. @author MyEclipse Persistence Tools
++ */
++
++public abstract class AbstractCus implements java.io.Serializable {
++
++	// Fields
++
++	private Integer id;
++	private String name;
++	private String psWord;
++
++	// Constructors
++
++	/** default constructor */
++	public AbstractCus() {
++	}
++
++	/** minimal constructor */
++	public AbstractCus(String name) {
++		this.name = name;
++	}
++
++	/** full constructor */
++	public AbstractCus(String name, String psWord) {
++		this.name = name;
++		this.psWord = psWord;
++	}
++
++	// Property accessors
++
++	public Integer getId() {
++		return this.id;
++	}
++
++	public void setId(Integer id) {
++		this.id = id;
++	}
++
++	public String getName() {
++		return this.name;
++	}
++
++	public void setName(String name) {
++		this.name = name;
++	}
++
++	public String getPsWord() {
++		return this.psWord;
++	}
++
++	public void setPsWord(String psWord) {
++		this.psWord = psWord;
++	}
++
++}
+\ No newline at end of file
+diff --git a/src/Hibernate/user/BaseHibernateDAO.java b/src/Hibernate/user/BaseHibernateDAO.java
+new file mode 100644
+index 0000000..cbc0c6d
+--- /dev/null
++++ b/src/Hibernate/user/BaseHibernateDAO.java
+@@ -0,0 +1,17 @@
++package Hibernate.user;
++
++import Hibernate.HibernateSessionFactory;
++import org.hibernate.Session;
++
++
++/**
++ * Data access object (DAO) for domain model
++ * @author MyEclipse Persistence Tools
++ */
++public class BaseHibernateDAO implements IBaseHibernateDAO {
++	
++	public Session getSession() {
++		return HibernateSessionFactory.getSession();
++	}
++	
++}
+\ No newline at end of file
+diff --git a/src/Hibernate/user/Cus.hbm.xml b/src/Hibernate/user/Cus.hbm.xml
+new file mode 100644
+index 0000000..d495bab
+--- /dev/null
++++ b/src/Hibernate/user/Cus.hbm.xml
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
++"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
++<!-- 
++    Mapping file autogenerated by MyEclipse Persistence Tools
++-->
++<hibernate-mapping>
++    <class name="Hibernate.user.Cus" table="cus" catalog="test">
++        <id name="id" type="java.lang.Integer">
++            <column name="id" />
++            <generator class="native" />
++        </id>
++        <property name="name" type="java.lang.String">
++            <column name="name" length="45" not-null="true" />
++        </property>
++        <property name="psWord" type="java.lang.String">
++            <column name="psWord" length="45" />
++        </property>
++    </class>
++</hibernate-mapping>
+diff --git a/src/Hibernate/user/Cus.java b/src/Hibernate/user/Cus.java
+new file mode 100644
+index 0000000..e1a65b0
+--- /dev/null
++++ b/src/Hibernate/user/Cus.java
+@@ -0,0 +1,24 @@
++package Hibernate.user;
++
++/**
++ * Cus entity. @author MyEclipse Persistence Tools
++ */
++public class Cus extends AbstractCus implements java.io.Serializable {
++
++	// Constructors
++
++	/** default constructor */
++	public Cus() {
++	}
++
++	/** minimal constructor */
++	public Cus(String name) {
++		super(name);
++	}
++
++	/** full constructor */
++	public Cus(String name, String psWord) {
++		super(name, psWord);
++	}
++
++}
+diff --git a/src/Hibernate/user/CusDAO.java b/src/Hibernate/user/CusDAO.java
+new file mode 100644
+index 0000000..d939ff5
+--- /dev/null
++++ b/src/Hibernate/user/CusDAO.java
+@@ -0,0 +1,142 @@
++package Hibernate.user;
++
++import java.util.List;
++import org.hibernate.LockOptions;
++import org.hibernate.Query;
++import org.hibernate.criterion.Example;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++
++/**
++ * A data access object (DAO) providing persistence and search support for Cus
++ * entities. Transaction control of the save(), update() and delete() operations
++ * can directly support Spring container-managed transactions or they can be
++ * augmented to handle user-managed Spring transactions. Each of these methods
++ * provides additional information for how to configure it for the desired type
++ * of transaction control.
++ * 
++ * @see Hibernate.user.Cus
++ * @author MyEclipse Persistence Tools
++ */
++public class CusDAO extends BaseHibernateDAO {
++	private static final Logger log = LoggerFactory.getLogger(CusDAO.class);
++	// property constants
++	public static final String NAME = "name";
++	public static final String PS_WORD = "psWord";
++
++	public void save(Cus transientInstance) {
++		log.debug("saving Cus instance");
++		try {
++			getSession().save(transientInstance);
++			log.debug("save successful");
++		} catch (RuntimeException re) {
++			log.error("save failed", re);
++			throw re;
++		}
++	}
++
++	public void delete(Cus persistentInstance) {
++		log.debug("deleting Cus instance");
++		try {
++			getSession().delete(persistentInstance);
++			log.debug("delete successful");
++		} catch (RuntimeException re) {
++			log.error("delete failed", re);
++			throw re;
++		}
++	}
++
++	public Cus findById(java.lang.Integer id) {
++		log.debug("getting Cus instance with id: " + id);
++		try {
++			Cus instance = (Cus) getSession().get("Hibernate.user.Cus", id);
++			return instance;
++		} catch (RuntimeException re) {
++			log.error("get failed", re);
++			throw re;
++		}
++	}
++
++	public List findByExample(Cus instance) {
++		log.debug("finding Cus instance by example");
++		try {
++			List results = getSession().createCriteria("Hibernate.user.Cus")
++					.add(Example.create(instance)).list();
++			log.debug("find by example successful, result size: "
++					+ results.size());
++			return results;
++		} catch (RuntimeException re) {
++			log.error("find by example failed", re);
++			throw re;
++		}
++	}
++
++	public List findByProperty(String propertyName, Object value) {
++		log.debug("finding Cus instance with property: " + propertyName
++				+ ", value: " + value);
++		try {
++			String queryString = "from Cus as model where model."
++					+ propertyName + "= ?";
++			Query queryObject = getSession().createQuery(queryString);
++			queryObject.setParameter(0, value);
++			return queryObject.list();
++		} catch (RuntimeException re) {
++			log.error("find by property name failed", re);
++			throw re;
++		}
++	}
++
++	public List findByName(Object name) {
++		return findByProperty(NAME, name);
++	}
++
++	public List findByPsWord(Object psWord) {
++		return findByProperty(PS_WORD, psWord);
++	}
++
++	public List findAll() {
++		log.debug("finding all Cus instances");
++		try {
++			String queryString = "from Cus";
++			Query queryObject = getSession().createQuery(queryString);
++			return queryObject.list();
++		} catch (RuntimeException re) {
++			log.error("find all failed", re);
++			throw re;
++		}
++	}
++
++	public Cus merge(Cus detachedInstance) {
++		log.debug("merging Cus instance");
++		try {
++			Cus result = (Cus) getSession().merge(detachedInstance);
++			log.debug("merge successful");
++			return result;
++		} catch (RuntimeException re) {
++			log.error("merge failed", re);
++			throw re;
++		}
++	}
++
++	public void attachDirty(Cus instance) {
++		log.debug("attaching dirty Cus instance");
++		try {
++			getSession().saveOrUpdate(instance);
++			log.debug("attach successful");
++		} catch (RuntimeException re) {
++			log.error("attach failed", re);
++			throw re;
++		}
++	}
++
++	public void attachClean(Cus instance) {
++		log.debug("attaching clean Cus instance");
++		try {
++			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
++			log.debug("attach successful");
++		} catch (RuntimeException re) {
++			log.error("attach failed", re);
++			throw re;
++		}
++	}
++}
+\ No newline at end of file
+diff --git a/src/Hibernate/user/IBaseHibernateDAO.java b/src/Hibernate/user/IBaseHibernateDAO.java
+new file mode 100644
+index 0000000..53b981c
+--- /dev/null
++++ b/src/Hibernate/user/IBaseHibernateDAO.java
+@@ -0,0 +1,12 @@
++package Hibernate.user;
++
++import org.hibernate.Session;
++
++
++/**
++ * Data access interface for domain model
++ * @author MyEclipse Persistence Tools
++ */
++public interface IBaseHibernateDAO {
++	public Session getSession();
++}
+\ No newline at end of file
+diff --git a/src/hibernate.cfg.xml b/src/hibernate.cfg.xml
+new file mode 100644
+index 0000000..d430ec0
+--- /dev/null
++++ b/src/hibernate.cfg.xml
+@@ -0,0 +1,27 @@
++<?xml version='1.0' encoding='UTF-8'?>
++<!DOCTYPE hibernate-configuration PUBLIC
++          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
++          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
++<!-- Generated by MyEclipse Hibernate Tools.                   -->
++<hibernate-configuration>
++
++	<session-factory>
++		<property name="dialect">
++			org.hibernate.dialect.MySQLDialect
++		</property>
++		<property name="connection.url">
++			jdbc:mysql://192.168.0.51:3306/test
++		</property>
++		<property name="connection.username">sa</property>
++		<property name="connection.password">16961055@pg@</property>
++		<property name="connection.driver_class">
++			com.mysql.jdbc.Driver
++		</property>
++		<property name="myeclipse.connection.profile">
++			mysqlDrive
++		</property>
++		<mapping resource="Hibernate/user/Cus.hbm.xml" />
++
++	</session-factory>
++
++</hibernate-configuration>
+\ No newline at end of file
+diff --git a/src/ts/web/tsServlet.java b/src/ts/web/tsServlet.java
+index db89a0f..e84e4c1 100644
+--- a/src/ts/web/tsServlet.java
++++ b/src/ts/web/tsServlet.java
+@@ -8,26 +8,48 @@ import javax.servlet.http.HttpServlet;
+ import javax.servlet.http.HttpServletRequest;
+ import javax.servlet.http.HttpServletResponse;
+ 
++import org.hibernate.Hibernate;
++import org.hibernate.Session;
++import org.hibernate.SessionBuilder;
++import org.hibernate.SessionFactory;
++import org.hibernate.Transaction;
++
++import Hibernate.HibernateSessionFactory;
++import Hibernate.user.Cus;
++import Hibernate.user.CusDAO;
++
+ public class tsServlet extends HttpServlet {
+ 
+ 	/**
+-	 * The doPost method of the servlet. <br>
+-	 *
+-	 * This method is called when a form has its tag value method equals to post.
+ 	 * 
+-	 * @param request the request send by the client to the server
+-	 * @param response the response send by the server to the client
+-	 * @throws ServletException if an error occurred
+-	 * @throws IOException if an error occurred
+ 	 */
++	Session session=null;
++	Transaction ts=null;
++	CusDAO cusDao=new CusDAO();
++	Cus cus=new Cus();
+ 	public void doPost(HttpServletRequest request, HttpServletResponse response)
+ 			throws ServletException, IOException {
+ 		response.setContentType("text/html;charset=utf-8");
+         PrintWriter out = response.getWriter();
+-        request.setCharacterEncoding("gb2312");
++        request.setCharacterEncoding("utf-8");
+         String username = request.getParameter("username");
+         String password = request.getParameter("password");
+-        System.out.println(username+"|"+password);
++        if(cusDao.findByName(username).size()!=0)
++        	{
++        	response.getWriter().write("用户名重复");
++        	}
++        else{
++	        cus.setName(username);
++	        cus.setPsWord(password);
++	        session=HibernateSessionFactory.getSession();
++	    	ts=session.beginTransaction();
++//	        ts.begin();
++	        cusDao.save(cus);
++	        ts.commit();
++	        session.close();
++	        System.out.println("保存成功");
++	        response.getWriter().write("保存成功");
++	        }
+ 	}
+ 
+ }
