@@ -53,8 +53,10 @@ public class tsServlet extends HttpServlet {
 			}
 			// 登录
 		} else if (type.equals("up")) {
+			System.out.println(cusDao.findByName(username).size());
+			System.out.println(cusDao.findByName(username).size() == 0);
 			if (cusDao.findByName(username).size() == 0) {
-				response.getWriter().write("无此用户，请核实用户名");
+				response.getWriter().write("nona");
 			} else if (cusDao.findByName(username).size() != 0) {
 				list = cusDao.findByName(username);
 				cus = (Cus) list.get(0);
@@ -64,6 +66,7 @@ public class tsServlet extends HttpServlet {
 				} else if (cus.getPsWord().equals(password)) {
 					response.getWriter().write("ok");
 				}
+
 			}
 		}
 

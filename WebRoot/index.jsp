@@ -22,11 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							{alert("用户名和密码不能为空");}
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
 					function (data) {
+						if(data=="nona"){alert("无此用户请核实，请核实用户名！");}
 						if(data=="error"){alert($("#username").val()+",你的密码有误！");}
-						if(data="ok"){
+						if(data=="ok"){
 										alert($("#username").val()+",欢迎你的登录！");
 										location.href="./table.jsp";
-										}
+									 }
 									});
 				}
 		});
@@ -41,7 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <title>person table</title>
 </head>
 <body>
-
        	<div data-role="fieldcontain">
        		<label for="text-1">用户名:</label>
        		<input name="username" id="username"
@@ -52,11 +52,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        		<input name="password" id="password"
        			data-clear-btn="true" value="" type="text" data-inline="true" />
        	</div>
+       	<div data-role="controlgroup" data-type="horizontal">
        	<a href="" id="new" data-role="button"
-       		data-inline="true">
+       		 >
        		注册
-       	</a><br>
-       	<a href="" id="up" data-role="button" data-inline="true">登录</a>
+       	</a>
+       	<a href="" id="up" data-role="button"  >登录</a>
+       	</div>
        </form>
 </body>
 </html>
