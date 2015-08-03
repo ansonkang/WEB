@@ -11,6 +11,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		
+		$("#btnTS").click(function(){
+		 $('#lab1').text("11111");
+		});
 		$("#down").click(function(){
 			if($("#username").val()==""||$("#password").val()=="")
 				{alert("用户名和密码不能为空");}
@@ -41,29 +45,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <title>table</title>
   <body>
-  	This is my JSP page.
+  	<a href="" id="btnTS" data-role="button">Link button</a>
   	<br>
-  	          <p>喜爱的颜色：</p>
-  	          <form >
-  	          	<fieldset data-role="controlgroup">
-  	          		<legend>请选择您喜爱的颜色：</legend>
-  	          		<label for="red">红色</label>
-  	          		<input type="radio" name="favcolor" id="red"
-  	          			value="red">
-  	          		<label for="green">绿色</label>
-  	          		<input type="radio" name="favcolor" id="green"
-  	          			value="green">
-  	          		<label for="blue">蓝色</label>
-  	          		<input type="radio" name="favcolor" id="blue"
-  	          			value="blue">
-  	          		<label for="yellow">黄色</label>
-  	          		<input type="radio" name="favcolor" id="yellow"
-  	          			value="yellow">
-  	          	</fieldset>
-  	          </form>
-  	                 	<div data-role="controlgroup" data-type="horizontal">
-       					<a href="" id="up" data-role="button" data-rel="back">上一题</a>
-				       	<a href="" id="down" data-role="button"  >下一题</a>
-				       	</div>
+	<form id='f1'>
+  	<p>喜爱的颜色：</p>
+  		<fieldset data-role="controlgroup">
+  			<legend>请选择您喜爱的颜色：</legend>
+  			<label for="red" id="lab1">红色</label>
+  			<input type="radio" name="favcolor" id="red"
+  				value="red">
+  			<label for="green" id="lab2">绿色</label>
+  			<input type="radio" name="favcolor" id="green"
+  				value="green">
+  			<label for="blue" id="lab3">蓝色</label>
+  			<input type="radio" name="favcolor" id="blue"
+  				value="blue">
+  			<label for="yellow" id='lab4'>黄色</label>
+  			<input type="radio" name="favcolor" id="yellow"
+  				value="yellow">
+  		</fieldset>
+  	</form>
+  	<div data-role="controlgroup" data-type="horizontal">
+  		<a href="" id="up" data-role="button" data-rel="back">返回</a>
+  		<a href="" id="down" data-role="button">下一题</a>
+  	</div>
   </body>
 </html>

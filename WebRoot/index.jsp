@@ -23,11 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
 					function (data) {
 						if(data=="nona"){alert("无此用户，请核实用户名！");}
-						if(data=="error"){alert($("#username").val()+",你的密码有误！");}
-						if(data=="ok"){
+						else if(data=="error"){alert($("#username").val()+",你的密码有误！");}
+						else if(data=="ok"){
 										alert($("#username").val()+",欢迎你的登录！");
 										location.href="./table.jsp";
 									 }
+						else{alert(data);}
 									});
 				}
 		});
