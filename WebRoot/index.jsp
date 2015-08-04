@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						else if(data=="error"){alert($("#username").val()+",你的密码有误！");}
 						else if(data=="ok"){
 										alert($("#username").val()+",欢迎你的登录！");
-										location.href="./table.jsp";
+										location.href="./table1.jsp";
 									 }
 						else{alert(data);}
 									});

@@ -9,9 +9,9 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<property name="connection.url">jdbc:mysql://127.0.0.1:3306/test</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">13696962467&amp;KK</property>
+		<property name="connection.url">jdbc:mysql://192.168.0.51:3306/test</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">16961055@pg@</property>
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
@@ -19,6 +19,7 @@
 			mysqlDrive
 		</property>
 		<mapping resource="Hibernate/user/Cus.hbm.xml" />
+		<mapping resource="Hibernate/queEntry/Queentry.hbm.xml" />
 
 	</session-factory>
 
