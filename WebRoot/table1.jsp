@@ -41,5 +41,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div id="div2">
 		  </div>
 	  <input type="submit" data-inline="true" value="提交">
-</body>
+	</body>
 </html>

@@ -32,6 +32,7 @@ public class queServlet extends HttpServlet {
 	String strAll = "";
 	String strQue = "";
 	String strQueEntry = "";
+	String a[]=null;
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,10 +53,14 @@ public class queServlet extends HttpServlet {
 			strQueEntry = "";
 			for (int j = 0; j < listEntry.size(); j++) {
 				queEntry = (Queentry) listEntry.get(j);
-				strQueEntry += "|" + queEntry.getDesc();
+					if(j==0) {
+						strQueEntry=queEntry.getDesc();
+					}else{
+						strQueEntry += "|"+ queEntry.getDesc();
+					}
+
 			}
-			System.out.println(strQueEntry);
-			response.getWriter().write(getStr(strQue, strQueEntry));
+			response.getWriter().write(getStr(strQue, strQueEntry,i));
 		}
 
 		ts.commit();
@@ -63,17 +68,23 @@ public class queServlet extends HttpServlet {
 
 	}
 
-	private String getStr(String strQue, String strQueEntry) {
+	private String getStr(String strQue, String strQueEntry, int i) {
 		// TODO Auto-generated method stub
 
-		String str = "<h1>" + strQue + "</h1>";
+		String str = "<h1>" + strQue + "</h1><div data-role=\"controlgroup\">";
+		a=strQueEntry.split("\\|");
+		for(int k=0;k<a.length;k++){
+			str+="<label for=\"id"+i+k+"\">"+a[k]+"</label><input type=\"radio\" name=\"id"+i+k+"\" id=\"id"+i+k+"\" value=\"id"+i+k+"\">";
+		}
+		str+="</div>";
 		// +
 		// "<div data-role=\"controlgroup\"><label for=\"red\">ºìÉ«</label><input type=\"radio\" name=\"favcolor\" id=\"red\" value=\"red\">"
 		// +
 		// "<label for=\"green\">ÂÌÉ«</label><input type=\"radio\" name=\"favcolor\" id=\"green\" value=\"green\"><label for=\"blue\">À¶É«</label>"
 		// +
 		// "<input type=\"radio\" name=\"favcolor\" id=\"blue\" value=\"blue\"></div>";
-
+		System.out.println(str);
 		return str;
+		
 	}
 }
