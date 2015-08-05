@@ -19,6 +19,7 @@
 			mysqlDrive
 		</property>
 		<mapping resource="Hibernate/user/Cus.hbm.xml" />
+		<mapping resource="Hibernate/que/Que.hbm.xml" />
 		<mapping resource="Hibernate/queEntry/Queentry.hbm.xml" />
 
 	</session-factory>

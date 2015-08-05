@@ -8,6 +8,7 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import Hibernate.queEntry.QueentryDAO;
 import Hibernate.user.BaseHibernateDAO;
 
 /**
@@ -61,10 +62,10 @@ public class QueDAO extends BaseHibernateDAO {
 	}
 
 	public List findEntryByQue(Que que) {
+		QueentryDAO dao = new QueentryDAO();
 		log.debug("finding Que instance by example");
 		try {
-			List results = (List) getSession().get(
-					"Hibernate.queEntry.Queentry", que.getId());
+			List results = dao.findByParentId(que.getId());
 			log.debug("根据queID查询分录:" + results.size());
 			return results;
 		} catch (RuntimeException re) {
