@@ -27,19 +27,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#btnTS").click(function(){
-			{$.post("servlet/queServlet",{type:"go"},function(data){$("#div2").append(data).trigger("create");});}
-		});
+			{$.post("servlet/queServlet",{type:"go"},function(data){$("#div1").append(data).trigger("create");});}
+			
+			$("#submit").click(function(){
+				$("input:radio:checked").each(function(){alter($(this).html);});
+			}); 
 	});
 </script>
   </head>
   
   <body>
-	  <div id="div1">
-		<button data-role="button"  id="btnTS">1</button>
-	  </div>
-		  <div id="div2">
+		  <div id="div1">
 		  </div>
-	  <input type="submit" data-inline="true" value="提交">
+	  <input type="submit" data-inline="true" value="提交" id="submit">
 	</body>
 </html>
