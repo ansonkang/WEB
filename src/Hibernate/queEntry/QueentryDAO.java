@@ -1,12 +1,14 @@
 package Hibernate.queEntry;
 
-import Hibernate.user.BaseHibernateDAO;
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import Hibernate.user.BaseHibernateDAO;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -142,5 +144,12 @@ public class QueentryDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public Queentry findBystrId(String string) {
+		// TODO Auto-generated method stub
+		QueentryDAO queEntryDao = new QueentryDAO();
+
+		return queEntryDao.findById(Integer.parseInt(string));
 	}
 }

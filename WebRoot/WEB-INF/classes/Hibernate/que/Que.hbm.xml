@@ -16,5 +16,8 @@
         <property name="queDesc" type="java.lang.String">
             <column name="queDesc" length="45" />
         </property>
+        <property name="answer" type="java.lang.String">
+            <column name="answer" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

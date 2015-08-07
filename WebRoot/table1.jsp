@@ -30,7 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			{$.post("servlet/queServlet",{type:"go"},function(data){$("#div1").append(data).trigger("create");});}
 			
 			$("#submit").click(function(){
-				$("input:radio:checked").each(function(){alter($(this).html);});
+				var varAnswer="";
+				$("input:radio:checked").each(function(){varAnswer+=$(this).attr("id")+";"});
+				/*alert(varAnswer);*/
+				$.post("servlet/queServlet",{type:"answer",answer:varAnswer},function(data){$("#div1").append(data).trigger("create");});
 			}); 
 	});
 </script>

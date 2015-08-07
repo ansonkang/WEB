@@ -27,6 +27,7 @@ public class QueDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String QUE_NUM = "queNum";
 	public static final String QUE_DESC = "queDesc";
+	public static final String ANSWER = "answer";
 
 	public void save(Que transientInstance) {
 		log.debug("saving Que instance");
@@ -61,15 +62,14 @@ public class QueDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findEntryByQue(Que que) {
-		QueentryDAO dao = new QueentryDAO();
-		log.debug("finding Que instance by example");
+	public Que findBystrId(String id) {
+		log.debug("getting Que instance with id: " + id);
 		try {
-			List results = dao.findByParentId(que.getId());
-			log.debug("根据queID查询分录:" + results.size());
-			return results;
+			Que instance = (Que) getSession().get("Hibernate.que.Que",
+					Integer.parseInt(id));
+			return instance;
 		} catch (RuntimeException re) {
-			log.error("根据queID查询分录:", re);
+			log.error("get failed", re);
 			throw re;
 		}
 	}
@@ -109,6 +109,10 @@ public class QueDAO extends BaseHibernateDAO {
 
 	public List findByQueDesc(Object queDesc) {
 		return findByProperty(QUE_DESC, queDesc);
+	}
+
+	public List findByAnswer(Object answer) {
+		return findByProperty(ANSWER, answer);
 	}
 
 	public List findAll() {
@@ -155,5 +159,11 @@ public class QueDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public List findEntryByQue(Que que) {
+		QueentryDAO dao = new QueentryDAO();
+
+		return dao.findByParentId(que.getId());
 	}
 }

@@ -12,6 +12,7 @@ public abstract class AbstractQue implements java.io.Serializable {
 	private Integer id;
 	private String queNum;
 	private String queDesc;
+	private String answer;
 
 	// Constructors
 
@@ -20,9 +21,10 @@ public abstract class AbstractQue implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AbstractQue(String queNum, String queDesc) {
+	public AbstractQue(String queNum, String queDesc, String answer) {
 		this.queNum = queNum;
 		this.queDesc = queDesc;
+		this.answer = answer;
 	}
 
 	// Property accessors
@@ -49,6 +51,14 @@ public abstract class AbstractQue implements java.io.Serializable {
 
 	public void setQueDesc(String queDesc) {
 		this.queDesc = queDesc;
+	}
+
+	public String getAnswer() {
+		return this.answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 }

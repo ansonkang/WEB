@@ -13,7 +13,7 @@ public class Que extends AbstractQue implements java.io.Serializable {
 
 	/** full constructor */
 	public Que(String queNum, String queDesc) {
-		super(queNum, queDesc);
+		super(queNum, queDesc, queDesc);
 	}
 
 }
