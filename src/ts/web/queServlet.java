@@ -102,7 +102,7 @@ public class queServlet extends HttpServlet {
 		root = doc.addElement("table");
 		root.addAttribute("data-role", "table");
 		root.addAttribute("data-mode", "columntoggle");
-		root.addAttribute("class", "ui-body-c ui-responsive");
+		root.addAttribute("class", "ui-responsive table-stripe");
 		ele = root.addElement("thead");
 		ele = ele.addElement("tr");
 		ele.addAttribute("class", "ui-bar-c");

@@ -31,9 +31,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			$("#submit").click(function(){
 				var varAnswer="";
+				var loginBtn=this;
 				$("input:radio:checked").each(function(){varAnswer+=$(this).attr("id")+";"});
-				/*alert(varAnswer);*/
+
 				$.post("servlet/queServlet",{type:"answer",answer:varAnswer},function(data){$("#div1").append(data).trigger("create");});
+				/*提交按钮失效，以避免防止重新提交*/
+				$(loginBtn).attr('disabled', 'disabled');
 			}); 
 	});
 </script>
