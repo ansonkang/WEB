@@ -15,6 +15,13 @@
     <servlet-name>queServlet</servlet-name>
     <servlet-class>ts.web.queServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>typeServlet</servlet-name>
+    <servlet-class>ts.web.typeServlet</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -24,6 +31,10 @@
   <servlet-mapping>
     <servlet-name>queServlet</servlet-name>
     <url-pattern>/servlet/queServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>typeServlet</servlet-name>
+    <url-pattern>/servlet/typeServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

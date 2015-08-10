@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		});
 		$("#up").click(function(){
+		$.post("servlet/typeServlet",{type:"123"},function (data) {alert("22");});
 						if($("#username").val()==""||$("#password").val()=="")
 							{alert("用户名和密码不能为空");}
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
@@ -49,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	</div>
        	<div data-role="fieldcontain">
        		<input name="password" id="password"
-       			data-clear-btn="true" value="" type="text" data-inline="true"  placeholder="密码..."/>
+       			data-clear-btn="true" value="" type="password" data-inline="true"  placeholder="密码..."/>
        	</div>
        	<div data-role="controlgroup" data-type="horizontal">
        	<a href="" id="new" data-role="button"
