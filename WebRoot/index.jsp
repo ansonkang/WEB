@@ -18,7 +18,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		});
 		$("#up").click(function(){
-		$.post("servlet/typeServlet",{type:"123"},function (data) {alert("22");});
 						if($("#username").val()==""||$("#password").val()=="")
 							{alert("用户名和密码不能为空");}
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},

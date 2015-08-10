@@ -1,20 +1,22 @@
-package Hibernate.typeentry;
+package hibernate.typeentry;
+
+
 
 /**
  * Typeentry entity. @author MyEclipse Persistence Tools
  */
-public class Typeentry extends AbstractTypeentry implements
-		java.io.Serializable {
+public class Typeentry extends AbstractTypeentry implements java.io.Serializable {
 
-	// Constructors
+    // Constructors
 
-	/** default constructor */
-	public Typeentry() {
-	}
+    /** default constructor */
+    public Typeentry() {
+    }
 
-	/** full constructor */
-	public Typeentry(String number, String name, String parentId) {
-		super(number, name, parentId);
-	}
-
+    
+    /** full constructor */
+    public Typeentry(String number, String name, Integer parentId) {
+        super(number, name, parentId);        
+    }
+   
 }

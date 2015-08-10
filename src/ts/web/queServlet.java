@@ -88,7 +88,6 @@ public class queServlet extends HttpServlet {
 		} else if (type.equals("answer")) {
 			// 提交答案，判断是否正确并反馈
 			strAnswer = request.getParameter("answer");
-			System.out.println(checkAnwer(strAnswer));
 			response.getWriter().write(checkAnwer(strAnswer));
 		}
 
@@ -123,7 +122,6 @@ public class queServlet extends HttpServlet {
 			queEntry = queEntryDao.findBystrId(aS[1]);// 选择
 			// 判断回答是否正确
 			// if (queEntry.getId().equals(que.getAnswer())) {
-			System.out.println("ok");
 			ele.addElement("td").setText(que.getQueDesc());
 			ele.addElement("td").setText(queEntry.getDesc());
 			ele.addElement("td").setText(
