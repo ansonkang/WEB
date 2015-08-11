@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Hibernate.type.Type;
 import Hibernate.type.TypeDAO;
 import Hibernate.typeentry.Typeentry;
 import Hibernate.typeentry.TypeentryDAO;
@@ -33,8 +34,10 @@ public class typeServlet extends HttpServlet {
 	String strType = null;
 	TypeDAO typeDao = new TypeDAO();
 	TypeentryDAO typeEDao = new TypeentryDAO();
+	Type type = null;
 	Typeentry typeEntry = null;
-	List types = null;
+	List ltType = null;
+	List ltTypeEntry = null;
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,14 +46,15 @@ public class typeServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		strType = request.getParameter("type");
-		System.out.println(strType + "================");
-
-		types = typeEDao.findByParentId(typeDao.findByName("类别"));
-		for (Object obj : types) {
-			typeEntry = (Typeentry) obj;
+		ltType=typeDao.findByName("类别");
+		type=(Type) ltType.get(0);
+		
+		System.out.println(type.getId());
+		ltTypeEntry=typeEDao.findByParentId(1);
+		for(int i=0;i<ltTypeEntry.size();i++){
+			typeEntry=(Typeentry) ltTypeEntry.get(i);
 			System.out.println(typeEntry.getName());
 		}
-
 	}
 
 }
