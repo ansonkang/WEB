@@ -22,11 +22,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
-
+	// 自定义函数
+	function funClick(){
+		$("button").click(function(){
+												{$.post("servlet/typeServlet",{type:$(this).attr("name")},function(data){
+					
+					$("#div").empty().append(data).trigger("create");
+				})};
+			});
+	};
+	
 	$(document).ready(function(){
-		$("#type1").click(function(){
-			$.post("servlet/typeServlet",{type:"类别"},function(data){alert("123")})
-		});
+				{$.post("servlet/typeServlet",{type:"load"},function(data){
+					$("#divFooter").append(data).trigger("create");
+					funClick();
+				})};
 	});
 </script>
 
@@ -34,15 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 </head>
-<body>
+<body >
 
-<div data-role="page">
-  <div data-role="header">
-    <a href="#" data-role="button" data-icon="home" id="type1">首页</a>
-    <h1>欢迎访问我的主页</h1>
-    <a href="#" data-role="button" data-icon="search">搜索</a>
-  </div>
-</div>
+		    <div data-role="controlgroup" id="divFooter" data-type="horizontal">
+		    </div>
+		    <div id="div"></div>
+
 
 </body>
 </html>
