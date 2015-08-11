@@ -16,8 +16,8 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="45" />
         </property>
-        <property name="parentId" type="java.lang.String">
-            <column name="parentID" length="45" />
+        <property name="parentId" type="java.lang.Integer">
+            <column name="parentID" />
         </property>
     </class>
 </hibernate-mapping>

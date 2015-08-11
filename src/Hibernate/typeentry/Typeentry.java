@@ -13,7 +13,7 @@ public class Typeentry extends AbstractTypeentry implements
 	}
 
 	/** full constructor */
-	public Typeentry(String number, String name, String parentId) {
+	public Typeentry(String number, String name, Integer parentId) {
 		super(number, name, parentId);
 	}
 

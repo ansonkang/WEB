@@ -12,7 +12,7 @@ public abstract class AbstractTypeentry implements java.io.Serializable {
 	private Integer id;
 	private String number;
 	private String name;
-	private String parentId;
+	private Integer parentId;
 
 	// Constructors
 
@@ -21,7 +21,7 @@ public abstract class AbstractTypeentry implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AbstractTypeentry(String number, String name, String parentId) {
+	public AbstractTypeentry(String number, String name, Integer parentId) {
 		this.number = number;
 		this.name = name;
 		this.parentId = parentId;
@@ -53,11 +53,11 @@ public abstract class AbstractTypeentry implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public String getParentId() {
+	public Integer getParentId() {
 		return this.parentId;
 	}
 
-	public void setParentId(String parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 
