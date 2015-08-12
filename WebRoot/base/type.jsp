@@ -25,14 +25,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	// 自定义函数
 	function funClick(){
 		$("button").click(function(){
-												{$.post("servlet/typeServlet",{type:$(this).attr("name")},function(data){
-					
-					$("#div").empty().append(data).trigger("create");
+		//根据点击的按钮，获取基础信息明细
+					{
+						var vNmae=$(this).attr("name");
+						$.post("servlet/typeServlet",{type:vNmae},function(data){
+							$("#div").empty().append(data).trigger("create");
+							$("#save").val(vNmae).trigger("create");
 				})};
+			});
+		
+			//新增按钮
+			$("#add").click(function(){
+				var newInput = document.createElement("input"); 
+				newInput.class="new";
+				newInput.value="AAA";
+				$("#divNeW").append(newInput).trigger("create");
+			});
+			//保存按钮
+			$("#save").click(function(){
+				var v=$("#divNeW");
+				alert(v.equ(1).val());
 			});
 	};
 	
 	$(document).ready(function(){
+	//刷新时，获取基础信息
 				{$.post("servlet/typeServlet",{type:"load"},function(data){
 					$("#divFooter").append(data).trigger("create");
 					funClick();
@@ -46,9 +63,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body >
 
-		    <div data-role="controlgroup" id="divFooter" data-type="horizontal">
+		    <div data-role="header" id="divFooter" data-type="horizontal">
 		    </div>
+		    
 		    <div id="div"></div>
+		    <div id="divNeW"></div>
+			
+			<div data-role="footer" id="divFooter" data-type="horizontal">
+		    		<a type="button" data-role="fieldcontain" data-icon="plus" data-inline="true" name="add" id="add">新增</a>
+		    		<a type="button" data-role="fieldcontain" data-icon="check" data-inline="true" name="edit" id="edit">编辑</a>
+		    		<a type="button" data-role="fieldcontain" data-icon="check" data-inline="true" name="save"  value="类别" id="save">保存</a>
+		    </div>
 
 
 </body>

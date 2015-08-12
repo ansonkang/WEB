@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.jgroups.tests.perf.Data;
 
 import Hibernate.type.Type;
 import Hibernate.type.TypeDAO;
@@ -48,9 +49,13 @@ public class typeServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		System.out.println(new Data());
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		strType = request.getParameter("type");
+
+		System.out.println(strType);
 		// 刷新是汇总所有类别，将类别分批显示出来
 		response.getWriter().write(load(strType));
 	}
@@ -58,11 +63,10 @@ public class typeServlet extends HttpServlet {
 	private String load(String str) {
 		// 刷新是汇总所有类别，将类别分批显示出来
 		Document doc = DocumentHelper.createDocument();
-		root = doc.addElement("ul");
+		root = doc.addElement("div");
 
 		if (str.equals("load")) {
-			// 获取所有类别
-			// data-role="button" data-icon="plus"
+			// 获取所有类别 ，根据类别增加按钮
 			ltType = typeDao.findAll();
 			for (int i = 0; i < ltType.size(); i++) {
 				type = (Type) ltType.get(i);
@@ -70,6 +74,7 @@ public class typeServlet extends HttpServlet {
 				ele = root.addElement("button");
 				ele.setText(type.getName());
 				ele.addAttribute("name", type.getName());
+				ele.addAttribute("data-role", "fieldcontain");
 
 				ele.addAttribute("data-icon", "arrow-r");
 				ele.addAttribute("data-inline", "true");
@@ -89,11 +94,13 @@ public class typeServlet extends HttpServlet {
 
 				for (int j = 0; j < ltTypeEntry.size(); j++) {
 					typeEntry = (Typeentry) ltTypeEntry.get(j);
-					ele = root.addElement("p");
-					ele.setText(typeEntry.getName());
+					ele = root.addElement("input");
+					ele.setAttributeValue("value", typeEntry.getName());
+					ele.setAttributeValue("readonly", "true");
 				}
 			}
 		}
+		System.out.println(doc.getRootElement().asXML());
 		return doc.getRootElement().asXML();
 
 	}

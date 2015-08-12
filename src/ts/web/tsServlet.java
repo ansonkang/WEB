@@ -1,7 +1,6 @@
 package ts.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -30,12 +29,13 @@ public class tsServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-
-		request.setCharacterEncoding("utf-8");
+		// PrintWriter out = response.getWriter();
+		// request.setCharacterEncoding("utf-8");
+		// 获取用户名和密码
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
+		// 根据type判断注册OR登录
 		// 新注册用户
 		if (type.equals("new")) {
 			if (cusDao.findByName(username).size() != 0) {
@@ -52,6 +52,7 @@ public class tsServlet extends HttpServlet {
 			}
 			// 登录
 		} else if (type.equals("up")) {
+			// 查询是够有该用户
 			if (cusDao.findByName(username).size() == 0) {
 				response.getWriter().write("nona");
 			} else if (cusDao.findByName(username).size() != 0) {
