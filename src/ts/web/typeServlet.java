@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.jgroups.tests.perf.Data;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import Hibernate.HibernateSessionFactory;
 import Hibernate.type.Type;
 import Hibernate.type.TypeDAO;
 import Hibernate.typeentry.Typeentry;
@@ -45,17 +47,24 @@ public class typeServlet extends HttpServlet {
 	List ltTypeEntry = null;
 	Element root = null;
 	Element ele = null;
+	String[] types = null;
+	Session session = null;
+	Transaction ts = null;
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		System.out.println(new Data());
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		strType = request.getParameter("type");
+		if (request.getParameter("typeM") != null)
+			strType += "|" + request.getParameter("typeM");
+		if (request.getParameter("typeL") != null) {
+			strType += "|" + request.getParameter("typeL");
+		}
+		session = HibernateSessionFactory.getSession();
+		ts = session.beginTransaction();
 
-		System.out.println(strType);
 		// 刷新是汇总所有类别，将类别分批显示出来
 		response.getWriter().write(load(strType));
 	}
@@ -85,9 +94,30 @@ public class typeServlet extends HttpServlet {
 				}
 			}
 
-		} else {
+		} else if (strType.substring(0, 3).equals("add")) {
+			// 新增基础资料
+			types = strType.split("\\|");
+
+			typeEntry = new Typeentry();
+			typeEntry.setName(types[2]);
+			ltType = typeDao.findByName(types[1]);
+			type = (Type) ltType.get(0);
+			typeEntry.setParentId(type.getId());
+
+			typeEDao.save(typeEntry);
+
+			System.out.println(typeEntry.getName());// 父类别名称
+			System.out.println(typeEntry.getParentId());// 子类别名称
+
+			// strValue = request.getParameter("typeM");
+			// request.getParameter("typeL")
+			// typeDao.findByName(request.getParameter("typeM")).
+
+		} else if (strType.substring(0, 6).equals("select")) {
 			// 根据收入的类别名称，更新基础数据
-			ltType = typeDao.findByName(str);
+			types = strType.split("\\|");
+
+			ltType = typeDao.findByName(types[1]);
 			for (int i = 0; i < ltType.size(); i++) {
 				type = (Type) ltType.get(i);
 				ltTypeEntry = typeEDao.findByParentId(type.getId());
@@ -100,7 +130,6 @@ public class typeServlet extends HttpServlet {
 				}
 			}
 		}
-		System.out.println(doc.getRootElement().asXML());
 		return doc.getRootElement().asXML();
 
 	}
