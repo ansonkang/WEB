@@ -62,8 +62,6 @@ public class typeServlet extends HttpServlet {
 		if (request.getParameter("typeL") != null) {
 			strType += "|" + request.getParameter("typeL");
 		}
-		session = HibernateSessionFactory.getSession();
-		ts = session.beginTransaction();
 
 		// 刷新是汇总所有类别，将类别分批显示出来
 		response.getWriter().write(load(strType));
@@ -96,22 +94,22 @@ public class typeServlet extends HttpServlet {
 
 		} else if (strType.substring(0, 3).equals("add")) {
 			// 新增基础资料
+			System.out.println(strType);
 			types = strType.split("\\|");
 
-			typeEntry = new Typeentry();
-			typeEntry.setName(types[2]);
+			Typeentry typeEntry2 = new Typeentry();
+			typeEntry2.setName(types[2]);
 			ltType = typeDao.findByName(types[1]);
 			type = (Type) ltType.get(0);
-			typeEntry.setParentId(type.getId());
+			typeEntry2.setParentId(type.getId());
 
-			typeEDao.save(typeEntry);
+			session = HibernateSessionFactory.getSession();
+			ts = session.beginTransaction();
+			typeEDao.save(typeEntry2);
 
-			System.out.println(typeEntry.getName());// 父类别名称
-			System.out.println(typeEntry.getParentId());// 子类别名称
-
-			// strValue = request.getParameter("typeM");
-			// request.getParameter("typeL")
-			// typeDao.findByName(request.getParameter("typeM")).
+			System.out.println("----1-----" + typeEntry2.getId());
+			ts.commit();
+			System.out.println("----2-----" + typeEntry2.getId());
 
 		} else if (strType.substring(0, 6).equals("select")) {
 			// 根据收入的类别名称，更新基础数据

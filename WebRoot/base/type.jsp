@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$.post("servlet/typeServlet",{type:"select",typeM:vNmae},function(data){
 							$("#div").empty().append(data).trigger("create");
 							$("#save").val(vNmae).trigger("create");
+							$("#divNeW").empty();
 				})};
 			});
 		
@@ -38,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#add").click(function(){
 				var newInput = document.createElement("input"); 
 				newInput.id="new";
-				newInput.value="AAA";
+				newInput.placeholder="请录入，新增信息";
 				$("#divNeW").append(newInput).trigger("create");
 			});
 			//保存按钮
