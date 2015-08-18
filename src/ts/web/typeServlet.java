@@ -104,13 +104,12 @@ public class typeServlet extends HttpServlet {
 			typeEntry2.setParentId(type.getId());
 
 			session = HibernateSessionFactory.getSession();
-			ts = session.beginTransaction();
-			typeEDao.save(typeEntry2);
-
-			System.out.println("----1-----" + typeEntry2.getId());
+			ts = session.getTransaction();
+			ts.begin();
+			session.save(typeEntry2);
 			ts.commit();
-			System.out.println("----2-----" + typeEntry2.getId());
-
+			if (session.isOpen())
+				session.close();
 		} else if (strType.substring(0, 6).equals("select")) {
 			// 根据收入的类别名称，更新基础数据
 			types = strType.split("\\|");
