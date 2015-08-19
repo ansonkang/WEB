@@ -24,25 +24,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	// 自定义函数
 	function funClick(){
-		$("button").click(function(){
-		//根据点击的按钮，获取基础信息明细
-					{
-						var vNmae=$(this).attr("name");
-						$.post("servlet/typeServlet",{type:"select",typeM:vNmae},function(data){
-							$("#div").empty().append(data).trigger("create");
-							$("#save").val(vNmae).trigger("create");
-							$("#divNeW").empty();
-				})};
-			});
+			//1据点击的按钮，获取基础信息明细
+			$("button").click(function(){
+						{
+							var vNmae=$(this).attr("name");
+							$.post("servlet/typeServlet",{type:"select",typeM:vNmae},function(data){
+								$("#div").empty().append(data).trigger("create");
+								$("#save").val(vNmae).trigger("create");
+								$("#divNeW").empty();
+					})};
+				});
 		
-			//新增按钮
+			//2新增按钮
 			$("#add").click(function(){
 				var newInput = document.createElement("input"); 
 				newInput.id="new";
 				newInput.placeholder="请录入，新增信息";
 				$("#divNeW").append(newInput).trigger("create");
 			});
-			//保存按钮
+			//3保存按钮
 			$("#save").click(function(){
 				$("#divNeW input").each(function(){
 				//逐个上传保存，后续考虑用json一次性传值,还需判断保存是否成功，失败及失败原因
@@ -51,6 +51,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 				alert("保存成功！");
 			});
+			//4编辑按钮
+			$("#edit").click(function(){
+				$("#div").each(function(){
+								var newCheck = document.createElement("checkbox"); 
+					$(this).append(newCheck).trigger("create");
+					alert("123");
+				});
+			});
+			
 	};
 	
 	$(document).ready(function(){

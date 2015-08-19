@@ -117,6 +117,7 @@ public class typeServlet extends HttpServlet {
 				for (int j = 0; j < ltTypeEntry.size(); j++) {
 					typeEntry = (Typeentry) ltTypeEntry.get(j);
 					ele = root.addElement("input");
+					ele.setAttributeValue("id", typeEntry.getId().toString());
 					ele.setAttributeValue("value", typeEntry.getName());
 					ele.setAttributeValue("readonly", "true");
 				}
