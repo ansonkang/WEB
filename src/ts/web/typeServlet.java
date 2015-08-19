@@ -1,7 +1,6 @@
 package ts.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -48,14 +47,11 @@ public class typeServlet extends HttpServlet {
 	Element root = null;
 	Element ele = null;
 	String[] types = null;
-	Session session = null;
-	Transaction ts = null;
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
 		strType = request.getParameter("type");
 		if (request.getParameter("typeM") != null)
 			strType += "|" + request.getParameter("typeM");
@@ -94,6 +90,7 @@ public class typeServlet extends HttpServlet {
 
 		} else if (strType.substring(0, 3).equals("add")) {
 			// 新增基础资料
+			// System.out.println(strType);
 			System.out.println(strType);
 			types = strType.split("\\|");
 
@@ -102,14 +99,12 @@ public class typeServlet extends HttpServlet {
 			ltType = typeDao.findByName(types[1]);
 			type = (Type) ltType.get(0);
 			typeEntry2.setParentId(type.getId());
-
-			session = HibernateSessionFactory.getSession();
-			ts = session.getTransaction();
+			// 此处多次新建session、transaction是否可以优化？
+			Session session = HibernateSessionFactory.getSession();
+			Transaction ts = session.getTransaction();
 			ts.begin();
 			session.save(typeEntry2);
 			ts.commit();
-			if (session.isOpen())
-				session.close();
 		} else if (strType.substring(0, 6).equals("select")) {
 			// 根据收入的类别名称，更新基础数据
 			types = strType.split("\\|");

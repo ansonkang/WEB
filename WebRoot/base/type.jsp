@@ -44,14 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 			//保存按钮
 			$("#save").click(function(){
-				var v;
 				$("#divNeW input").each(function(){
 				//逐个上传保存，后续考虑用json一次性传值,还需判断保存是否成功，失败及失败原因
-				//$.post("servlet/typeServlet",{type:"add",typeM:$("#save").attr("value"),typeL:$(this).val()},function(data){});
+				$.post("servlet/typeServlet",{type:"add",typeM:$("#save").attr("value"),typeL:$(this).val()},function(data){});
 				
-				v+={"aid":$(this).val()};
 				});
-				alert(v.eq(0).aid);
+				alert("保存成功！");
 			});
 	};
 	
