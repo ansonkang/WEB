@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#new").click(function(){
 			if($("#username").val()==""||$("#password").val()=="")
 				{alert("用户名和密码不能为空");}
-			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"new"},function (data) {alert(data);});}
+			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"new"},function (data) {alert(data);}).error(function() { alert("网络有问题，请联系网管"); });}
 			
 		});
 		$("#up").click(function(){
@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										location.href="./table1.jsp";
 									 }
 						else{alert(data);}
-									});
+									}).error(function() { alert("网络有问题，请联系网管");});
 				}
 		});
 	});
