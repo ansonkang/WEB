@@ -27,7 +27,7 @@ import Hibernate.queEntry.QueentryDAO;
 public class queServlet extends HttpServlet {
 
 	/**
-	 * 这边用来实现答题功能 1.自动出题（题数） 2.根据页面选择，记录答案 3.汇总答题记录
+	 * 这边用来实现答题功能 1.自动出题（题数） 2.根据页面选择，记录答案 3.汇总答题记录 table1.jsp
 	 */
 	Session session = null;
 	Transaction ts = null;

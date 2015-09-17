@@ -26,14 +26,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function funClick(){
 			//1据点击的按钮，获取基础信息明细
 			$("button").click(function(){
-						{
 							var vNmae=$(this).attr("name");
 							$.post("servlet/typeServlet",{type:"select",typeM:vNmae},function(data){
 								$("#div").empty().append(data).trigger("create");
 								$("#save").val(vNmae).trigger("create");
 								$("#divNeW").empty();
-					})};
-				});
+								//按住1秒，编辑
+									  $("p").on("taphold",function(){									    
+									    $(this).click(function(){
+									    	location.href="./base/type.jsp#pagetwo";
+									    	var vPageTwo=$(this);
+									    	$("#pEdit").val(vPageTwo.html());
+									    	$("#pEdit").attr("name",vPageTwo.attr("id"));
+									    	vPageTwo.hide();
+									    				});
+									 	 });
+							})
+					}
+				);
 		
 			//2新增按钮
 			$("#add").click(function(){
@@ -41,23 +51,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				newInput.id="new";
 				newInput.placeholder="请录入，新增信息";
 				$("#divNeW").append(newInput).trigger("create");
+				$("#add").hide(1).trigger("create");
+				$("#save").show().trigger("create");
 			});
 			//3保存按钮
 			$("#save").click(function(){
 				$("#divNeW input").each(function(){
 				//逐个上传保存，后续考虑用json一次性传值,还需判断保存是否成功，失败及失败原因
-				$.post("servlet/typeServlet",{type:"add",typeM:$("#save").attr("value"),typeL:$(this).val()},function(data){});
-				
-				});
-				alert("保存成功！");
+				$.post("servlet/typeServlet",{type:"add",typeM:$("#save").attr("value"),typeL:$(this).val()},function(data){}).error(function() { alert("网络有问题，请联系网管");});
+												});
+				$("#add").show();
+				var vName=$("#save").attr("value");
+				alert(vName+"，保存成功！");
+				$("button[name="+vName+"]").click();
 			});
-			//4编辑按钮
-			$("#edit").click(function(){
-				$("#div").each(function(){
-								var newCheck = document.createElement("checkbox"); 
-					$(this).append(newCheck).trigger("create");
-					alert("123");
-				});
+			
+			//4 pagetwo页面删除按钮
+			$("#pDelete").click(function(){
+				$.post("servlet/typeServlet",{type:"delete",typeM:$("#pEdit").attr("name")},function(data){location.href="./base/type.jsp#pageone"});
+			});
+			//5 pagetwo页面保存按钮
+			$("#pSvae").click(function(){
 			});
 			
 	};
@@ -66,8 +80,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//刷新时，获取基础信息
 				{$.post("servlet/typeServlet",{type:"load"},function(data){
 					$("#divFooter").append(data).trigger("create");
+					//按钮赋权
 					funClick();
-				})};
+					}
+				)};
 	});
 </script>
 
@@ -75,19 +91,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 </head>
-<body >
-
-		    <div data-role="header" id="divFooter" data-type="horizontal">
+<body  >
+	<div data-role="page" id="pageone">
+		    <div data-role="fieldcontain" id="divFooter" data-role="controlgroup" data-type="horizontal">
 		    </div>
 		    
-		    <div id="div"></div>
+		    <div id="div" class="ui-grid-a" ></div>
 		    <div id="divNeW"></div>
 			
-			<div data-role="footer" id="divFooter" data-type="horizontal">
+			<div data-role="fieldcontain"   data-role="controlgroup" data-type="horizontal">
 		    		<a type="button" data-role="fieldcontain" data-icon="plus" data-inline="true" name="add" id="add">新增</a>
-		    		<a type="button" data-role="fieldcontain" data-icon="check" data-inline="true" name="edit" id="edit">编辑</a>
 		    		<a type="button" data-role="fieldcontain" data-icon="check" data-inline="true" name="save"  value="类别" id="save">保存</a>
 		    </div>
+	</div>  
+	
+	<div data-role="page" id="pagetwo">
+
+		  <div data-role="content" id="change">
+			<input id="pEdit" name="test"></input>
+		  </div>
+
+			  <div data-role="footer">
+			  <a type="button" data-role="fieldcontain" data-icon="delete" data-inline="true" name="edit" id="pDelete">删除</a>
+			  <a type="button" data-role="fieldcontain" data-icon="check" data-inline="true" name="edit" id="pSave">保存</a>
+			  </div>
+	</div>   
+
 
 
 </body>

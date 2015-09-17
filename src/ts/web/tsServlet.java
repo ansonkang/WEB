@@ -17,7 +17,7 @@ import Hibernate.user.CusDAO;
 public class tsServlet extends HttpServlet {
 
 	/**
-	 * 
+	 * µÇÂ¼Ò³Ãæ index.jsp
 	 */
 	Session session = null;
 	Transaction ts = null;

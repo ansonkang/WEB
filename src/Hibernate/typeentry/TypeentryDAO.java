@@ -1,12 +1,14 @@
 package Hibernate.typeentry;
 
-import Hibernate.user.BaseHibernateDAO;
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import Hibernate.user.BaseHibernateDAO;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -54,6 +56,18 @@ public class TypeentryDAO extends BaseHibernateDAO {
 		try {
 			Typeentry instance = (Typeentry) getSession().get(
 					"Hibernate.typeentry.Typeentry", id);
+			return instance;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+
+	public Typeentry findById(String id) {
+		log.debug("getting Typeentry instance with id: " + id);
+		try {
+			Typeentry instance = (Typeentry) getSession().get(
+					"Hibernate.typeentry.Typeentry", Integer.parseInt(id));
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

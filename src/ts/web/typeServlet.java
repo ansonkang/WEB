@@ -76,6 +76,8 @@ public class typeServlet extends HttpServlet {
 				ltTypeEntry = typeEDao.findByParentId(type.getId());
 				ele = root.addElement("button");
 				ele.setText(type.getName());
+				// 修改布局
+				ele.addAttribute("class", "ui-grid-c");
 				ele.addAttribute("name", type.getName());
 				ele.addAttribute("data-role", "fieldcontain");
 
@@ -90,9 +92,9 @@ public class typeServlet extends HttpServlet {
 
 		} else if (strType.substring(0, 3).equals("add")) {
 			// 新增基础资料
-			// System.out.println(strType);
 			System.out.println(strType);
 			types = strType.split("\\|");
+			System.out.println(types[2]);
 
 			Typeentry typeEntry2 = new Typeentry();
 			typeEntry2.setName(types[2]);
@@ -116,12 +118,21 @@ public class typeServlet extends HttpServlet {
 
 				for (int j = 0; j < ltTypeEntry.size(); j++) {
 					typeEntry = (Typeentry) ltTypeEntry.get(j);
-					ele = root.addElement("input");
+					ele = root.addElement("p");
 					ele.setAttributeValue("id", typeEntry.getId().toString());
-					ele.setAttributeValue("value", typeEntry.getName());
-					ele.setAttributeValue("readonly", "true");
+					ele.setText(j + 1 + " ." + typeEntry.getName());
 				}
 			}
+		} else if (strType.substring(0, 6).equals("delete")) {
+			// 此处多次新建session、transaction是否可以优化？
+			types = strType.split("\\|");
+			typeEntry = typeEDao.findById(types[1]);
+			Session session = HibernateSessionFactory.getSession();
+			Transaction ts = session.getTransaction();
+			ts.begin();
+			session.delete(typeEntry);
+			ts.commit();
+			session.close();
 		}
 		return doc.getRootElement().asXML();
 
