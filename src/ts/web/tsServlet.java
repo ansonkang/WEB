@@ -29,8 +29,6 @@ public class tsServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		response.setContentType("text/html;charset=utf-8");
-		// PrintWriter out = response.getWriter();
-		// request.setCharacterEncoding("utf-8");
 		// 获取用户名和密码
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -54,13 +52,13 @@ public class tsServlet extends HttpServlet {
 		} else if (type.equals("up")) {
 			// 查询是够有该用户
 			if (cusDao.findByName(username).size() == 0) {
-				response.getWriter().write("nona");
+				response.getWriter().write("无此用户，请核实用户名！");
 			} else if (cusDao.findByName(username).size() != 0) {
 				list = cusDao.findByName(username);
 				cus = (Cus) list.get(0);
 				// 密码错误
 				if (!cus.getPsWord().equals(password)) {
-					response.getWriter().write("error");
+					response.getWriter().write("你的账号或密码有误！");
 				} else if (cus.getPsWord().equals(password)) {
 					response.getWriter().write("ok");
 				}
