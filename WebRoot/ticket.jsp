@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var vN=parseInt((day_E-day_S) / 1000 / 60 / 60 / 24)+2;//计算间隔天数
 		return vN;
 	}
-	$(document).load(function(){
+	$(document).ready(function(){
 		$("#count").change(function(){
 			var v= $(this).val();
 			

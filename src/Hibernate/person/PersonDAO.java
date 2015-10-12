@@ -96,10 +96,6 @@ public class PersonDAO extends BaseHibernateDAO {
 		return findByProperty(NUM, num);
 	}
 
-	public List findByNum(String num) {
-		return findByProperty(NUM, num);
-	}
-
 	public List findByName(Object name) {
 		return findByProperty(NAME, name);
 	}
@@ -111,7 +107,7 @@ public class PersonDAO extends BaseHibernateDAO {
 	public List findAll() {
 		log.debug("finding all Person instances");
 		try {
-			String queryString = "from Person order by num";
+			String queryString = "from Person";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -150,6 +146,20 @@ public class PersonDAO extends BaseHibernateDAO {
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			throw re;
+		}
+	}
+
+	public List findLikeName(String msg) {
+		// TODO Auto-generated method stub
+		log.debug("finding Person instance with property: name");
+		try {
+			String queryString = "from Person as model where model.name like ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, "%" + msg + "%");
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
 			throw re;
 		}
 	}

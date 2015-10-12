@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
 					function (data) {
 						if(data=="nona"){alert("无此用户，请核实用户名！");}
-						else if(data=="ok"){alert($("#username").val()+",欢迎你的登录！");location.href="./ticket.jsp";}
+						else if(data=="ok"){alert($("#username").val()+",欢迎你的登录！");location.href="./que.jsp";}
 						else{alert(data);}})
 							.error(function() { alert("网络有问题，请联系网管");});
 				}

@@ -1,5 +1,7 @@
 package Hibernate.person;
 
+import java.sql.Timestamp;
+
 /**
  * Person entity. @author MyEclipse Persistence Tools
  */
@@ -12,8 +14,9 @@ public class Person extends AbstractPerson implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Person(String num, String name, String state) {
-		super(num, name, state);
+	public Person(String num, String name, String state, Timestamp dateS,
+			Timestamp dateE) {
+		super(num, name, state, dateS, dateE);
 	}
 
 }

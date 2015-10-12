@@ -19,5 +19,11 @@
         <property name="state" type="java.lang.String">
             <column name="state" length="45" />
         </property>
+        <property name="dateS" type="java.sql.Timestamp">
+            <column name="date_S" length="0" />
+        </property>
+        <property name="dateE" type="java.sql.Timestamp">
+            <column name="date_E" length="0" />
+        </property>
     </class>
 </hibernate-mapping>

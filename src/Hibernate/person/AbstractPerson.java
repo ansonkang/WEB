@@ -1,5 +1,7 @@
 package Hibernate.person;
 
+import java.sql.Timestamp;
+
 /**
  * AbstractPerson entity provides the base persistence definition of the Person
  * entity. @author MyEclipse Persistence Tools
@@ -13,6 +15,8 @@ public abstract class AbstractPerson implements java.io.Serializable {
 	private String num;
 	private String name;
 	private String state;
+	private Timestamp dateS;
+	private Timestamp dateE;
 
 	// Constructors
 
@@ -21,10 +25,13 @@ public abstract class AbstractPerson implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AbstractPerson(String num, String name, String state) {
+	public AbstractPerson(String num, String name, String state,
+			Timestamp dateS, Timestamp dateE) {
 		this.num = num;
 		this.name = name;
 		this.state = state;
+		this.dateS = dateS;
+		this.dateE = dateE;
 	}
 
 	// Property accessors
@@ -59,6 +66,22 @@ public abstract class AbstractPerson implements java.io.Serializable {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Timestamp getDateS() {
+		return this.dateS;
+	}
+
+	public void setDateS(Timestamp dateS) {
+		this.dateS = dateS;
+	}
+
+	public Timestamp getDateE() {
+		return this.dateE;
+	}
+
+	public void setDateE(Timestamp dateE) {
+		this.dateE = dateE;
 	}
 
 }

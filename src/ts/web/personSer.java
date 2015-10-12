@@ -25,6 +25,7 @@ public class personSer extends HttpServlet {
 
 	Session session = HibernateSessionFactory.getSession();
 	Transaction ts = session.beginTransaction();
+	List list;
 	Person person;
 
 	@Override
@@ -44,21 +45,34 @@ public class personSer extends HttpServlet {
 		// 参数传入
 		response.setContentType("text/html;charset=utf-8");
 		String str = request.getParameter("msg");
-		response.getWriter().write(msg(str));
+
+		response.getWriter().write(msgByNum(str));
 	}
 
-	String msg(String msg) {
+	String msgByNum(String msg) {
 		// 输入工号返回信息
 		PersonDAO dao = new PersonDAO();
-		List list = dao.findAll();
-		String str = "查无此人！";
+		String str = "";
+
+		if (msg.length() == 6)// 输入的是工号
+		{
+			list = dao.findByNum(msg);
+		} else if (msg.subSequence(0, 1).equals("*"))
+		// 模糊查询名称
+		{
+			msg = msg.replace("*", "");
+			System.out.println(msg);
+			list = dao.findLikeName(msg);
+		} else
+		// 输入的是名称
+		{
+			list = dao.findByName(msg);
+		}
+		System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
 			person = (Person) list.get(i);
-			if (person.getNum().equals(msg)) {
-				str = person.getName() + ";工号:" + person.getNum() + ";状态："
-						+ person.getState();
-				break;
-			}
+			str += person.getNum() + ";" + person.getName() + ";"
+					+ person.getDateE() + ";" + "<br/>";
 		}
 		System.out.println(str);
 		return str;
