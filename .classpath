@@ -25,5 +25,7 @@
 			<attribute name="owner.project.facets" value="me.hibernate"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/json-2.2.1.jar"/>
+	<classpathentry kind="lib" path="src/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
