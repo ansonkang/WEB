@@ -36,55 +36,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="graph">Loading graph...</div>
 
 <script type="text/javascript">
-
-	
 	$(document).ready(function(){
 			//var myData = new Array([1, 1], [2, 3], [3, 2], [4, 3], [5, 2], [6, 3], [7, 2]);
 						$.post("./servlet/reportSer",{},
 					function (data) {
-						var myData=new Array([1, 2], [2, 3], [3, 2], [4, 3], [5, 2], [6, 3], [7, 2]);
-						myData[1][1]=5;
-						var myChart = new JSChart('graph', 'line');
+							//var myData = new Array(['MON', 21], ['TUE', 28], ['WEN', 12], ['THU', 17],['FRI',0],['SUN',0]);
+	//var colors = ['#AF0202', '#EC7A00', '#FCD200', '#81C714', '#EC7A00', '#FCD200', '#81C714'];
+
+	var myData = new Array(['周一', 0], ['周二', 0], ['周三', 0], ['周四', 0], ['周五', 0], ['周六', 0], ['周日', 0]);
+		for(var i=0;i<=6;i++)
+		{
+			myData[i][1]=eval(data.split('|')[i]);
+		}
+	
+	var colors = ['#FBFF00', '#0082FF', '#FF8000', '#81C714', '#00FFE6', '#9100FF', '#FF00AE'];
+	var myChart = new JSChart('graph', 'bar');
 	myChart.setDataArray(myData);
-	myChart.setTitle('周报');
+	myChart.colorizeBars(colors);
+	myChart.setTitle('本周全场业绩 单位:万元');
 	myChart.setTitleColor('#8E8E8E');
-	myChart.setTitleFontSize(11);
 	myChart.setAxisNameX('');
 	myChart.setAxisNameY('');
-	myChart.setAxisColor('#8420CA');
-	myChart.setAxisValuesColor('#949494');
-	myChart.setAxisPaddingLeft(100);
-	myChart.setAxisPaddingRight(120);
-	myChart.setAxisPaddingTop(50);
+	myChart.setAxisColor('#C4C4C4');
+	myChart.setAxisNameFontSize(16);
+	myChart.setAxisNameColor('#999');
+	myChart.setAxisValuesColor('#7E7E7E');
+	myChart.setBarValuesColor('#7E7E7E');
+	myChart.setAxisPaddingTop(60);
+	myChart.setAxisPaddingRight(140);
+	myChart.setAxisPaddingLeft(150);
 	myChart.setAxisPaddingBottom(40);
-	myChart.setAxisValuesDecimals(3);
-	myChart.setAxisValuesNumberX(10);
-	myChart.setShowXValues(false);
-	myChart.setGridColor('#C5A2DE');
-	myChart.setLineColor('#BBBBBB');
-	myChart.setLineWidth(2);
-	myChart.setFlagColor('#9D12FD');
-	myChart.setFlagRadius(4);
-	myChart.setTooltip([1, 'GDP 7.80']);
-	myChart.setTooltip([2, 'GDP 4.80']);
-	myChart.setTooltip([3, 'GDP 6.50']);
-	myChart.setTooltip([4, 'GDP 6.10']);
-	myChart.setTooltip([5, 'GDP 4.40']);
-	myChart.setTooltip([6, 'GDP 5.80']);
-	myChart.setTooltip([7, 'GDP 4.00']);
-	myChart.setLabelX([1, 'Mon']);
-	myChart.setLabelX([2, 'Tue']);
-	myChart.setLabelX([3, 'Wen']);
-	myChart.setLabelX([4, 'Thu']);
-	myChart.setLabelX([5, 'Fri']);
-	myChart.setLabelX([6, 'Sat']);
-	myChart.setLabelX([7, 'Sum']);
+	myChart.setTextPaddingLeft(105);
+	myChart.setTitleFontSize(11);
+	myChart.setBarBorderWidth(1);
+	myChart.setBarBorderColor('#C4C4C4');
+	myChart.setBarSpacingRatio(50);
+	myChart.setGrid(false);
 	myChart.setSize(616, 321);
 	//myChart.setBackgroundImage('chart_bg.jpg');
 	myChart.draw();
 	
 	}).
-				error(function() { alert("网络有问题，请联系网管"); });
+				error(function() { alert("网络有问题，请联系网管！"); });
 	
 
 
