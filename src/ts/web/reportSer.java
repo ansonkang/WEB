@@ -12,8 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import Hibernate.HibernateSessionFactory;
-import Hibernate.person.PersonDAO;
 import Hibernate.sales.Sales;
+import Hibernate.sales.SalesDAO;
 
 public class reportSer extends HttpServlet {
 
@@ -32,7 +32,7 @@ public class reportSer extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		// SalesDAO dao = new SalesDAO();
-		PersonDAO dao = new PersonDAO();
+		SalesDAO dao = new SalesDAO();
 		list = dao.findAll();
 		for (int i = 0; i < list.size(); i++) {
 			sales = (Sales) list.get(i);

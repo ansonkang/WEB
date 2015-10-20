@@ -26,7 +26,6 @@
 		<mapping resource="Hibernate/type/Type.hbm.xml" />
 		<mapping resource="Hibernate/typeentry/Typeentry.hbm.xml" />
 		<mapping resource="Hibernate/person/Person.hbm.xml" />
-		<mapping resource="Hibernate/sales/VSales.hbm.xml" />
 		<mapping resource="Hibernate/sales/Sales.hbm.xml" />
 
 	</session-factory>
