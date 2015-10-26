@@ -1,13 +1,15 @@
 package Hibernate.sales;
 
-import Hibernate.user.BaseHibernateDAO;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import Hibernate.user.BaseHibernateDAO;
 
 /**
  * A data access object (DAO) providing persistence and search support for Sales
@@ -103,6 +105,27 @@ public class SalesDAO extends BaseHibernateDAO {
 			String queryString = "from Sales";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all failed", re);
+			throw re;
+		}
+	}
+
+	// 返回最近几天的数据
+	public List findAll(int i) {
+		log.debug("finding all Sales instances");
+		try {
+			String queryString = "from Sales ORDER BY DATE DESC";
+			Query queryObject = getSession().createQuery(queryString);
+			List list = queryObject.list();
+			List newList = new ArrayList();
+			System.out.println(i - 1);
+			for (int j = i - 1; j >= 0; j--) {
+				newList.add(list.get(j));
+			}
+
+			return newList;
+
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
 			throw re;
