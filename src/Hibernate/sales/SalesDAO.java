@@ -119,7 +119,6 @@ public class SalesDAO extends BaseHibernateDAO {
 			Query queryObject = getSession().createQuery(queryString);
 			List list = queryObject.list();
 			List newList = new ArrayList();
-			System.out.println(i - 1);
 			for (int j = i - 1; j >= 0; j--) {
 				newList.add(list.get(j));
 			}

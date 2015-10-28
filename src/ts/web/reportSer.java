@@ -35,7 +35,7 @@ public class reportSer extends HttpServlet {
 
 		// 返回最近7天业绩
 		list = dao.findAll(7);
-
+		// 转换为json传至页面
 		JSONArray json = JSONArray.fromObject(list);
 		response.getWriter().write(json.toString());
 	}

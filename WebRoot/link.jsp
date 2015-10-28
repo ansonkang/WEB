@@ -38,6 +38,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <p>直链，餐票订购.</p>
         </a>
       </li>
+      
+      <li>
+        <a data-ajax="false" href="./report.jsp">
+        <img src="./photo/report.jpg">
+        <h2>报表</h2>
+        <p>常用报表</p>
+        </a>
+      </li>
+      
       <li>
         <a data-ajax="false" href="#">
         <img src="./photo/wait.png">

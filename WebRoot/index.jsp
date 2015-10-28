@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			else {$.post("ts.web/tsServlet",{username:$("#username").val(),password:$("#password").val(),type:"up"},
 					function (data) {
 						if(data=="nona"){alert("无此用户，请核实用户名！");}
-						else if(data=="ok"){alert($("#username").val()+",欢迎你的登录！");location.href="./que.jsp";}
+						else if(data=="ok"){alert($("#username").val()+",欢迎你的登录！");location.href="./link.jsp";}
 						else{alert(data);}})
 							.error(function() { alert("网络有问题，请联系网管");});
 				}
@@ -99,13 +99,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
        <title>登录页面</title>
 </head>
-<body>
-       	<div data-role="fieldcontain">
-       		<input name="username" id="username"
+<body >
+	<div data-role="page" style="background:url(photo/login.jpg) 50% 0 no-repeat;background-size:cover">
+       	<div data-role="fieldcontain" >
+       		<input name="username" id="username"  
        			data-clear-btn="true" value="" type="text" data-inline="true"  placeholder="用户名..."/>
        	</div>
-       	<div data-role="fieldcontain">
-       		<input name="password" id="password"
+       	<div data-role="fieldcontain" >
+       		<input name="password" id="password" 
        			data-clear-btn="true" value="" type="password" data-inline="true"  placeholder="密码..."/>
        	</div>
        	<div data-role="controlgroup" data-type="horizontal">
@@ -114,6 +115,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	<a href="" id="new" data-role="button">注册</a>
        	<a href="" id="up" data-role="button"  onclick="submitFunc()">登录</a>
        	</div>
-       </form>
+    </div>
 </body>
 </html>

@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					//字符串转JSON
 					var temp=eval("("+data+")");
 					
-						var myData = new Array(['周一', 0], ['周二',0,], ['周三', 0], ['周四', 0], ['周五', 0], ['周六', 0], ['周日', 0]);
+					var myData = new Array(['周一', 0], ['周二',0,], ['周三', 0], ['周四', 0], ['周五', 0], ['周六', 0], ['周日', 0]);
 		for(var i=0;i<temp.length;i++)
 		{
 			//myData[i][0]=eval(temp[i].date.date);
