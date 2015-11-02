@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json-2.2.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json-parser_fat.jar"/>
+	<classpathentry kind="lib" path="src/mail.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

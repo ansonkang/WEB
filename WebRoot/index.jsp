@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
 
 <script type="text/javascript">
+//设置cookie
 	function setCookie(name,value,hours,path){   
 	    var name = escape(name);   
 	    var value = escape(value);   

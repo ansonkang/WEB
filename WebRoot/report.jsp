@@ -30,32 +30,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript" src="js/jscharts.js"></script>
 
+<style>
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+
+.rotary{position:relative;width:854px;height:504px;margin:50px auto 0 auto;background:#d71f2e url(photo/rotary/bg1.png);}
+.btn7{position:absolute;left:10px;top:104px;width:100px;height:30px;cursor:pointer;}
+.btn15{position:absolute;left:10px;top:134px;width:100px;height:30px;cursor:pointer;}
+.btn20{position:absolute;left:10px;top:164px;width:100px;height:30px;cursor:pointer;}
+</style>
+
 </head>
 <body>
 
 <div id="graph">Loading graph...</div>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-			//var myData = new Array([1, 1], [2, 3], [3, 2], [4, 3], [5, 2], [6, 3], [7, 2]);
-						$.post("./servlet/reportSer",{},
+	function fun_day(day){						
+		$.post("./servlet/reportSer",{day:day},
 					function (data) {
 					//字符串转JSON
 					var temp=eval("("+data+")");
 					
-					var myData = new Array(['周一', 0], ['周二',0,], ['周三', 0], ['周四', 0], ['周五', 0], ['周六', 0], ['周日', 0]);
+					//var myData = new Array(['周一', 0], ['周二',0,], ['周三', 0], ['周四', 0], ['周五', 0], ['周六', 0], ['周日', 0]);
+					var myData=new Array();
+					var colors=new Array();
 		for(var i=0;i<temp.length;i++)
 		{
-			//myData[i][0]=eval(temp[i].date.date);
-			myData[i][0]=temp[i].date.date.toString();
-			myData[i][1]=eval(temp[i].amount);
+			colors[i]='#FA5E1F';
+			var arr=new Array();
+			arr[0]=temp[i].date.date.toString();
+			arr[1]=temp[i].amount;
+			myData[i]=arr;
+			
 		}
 	
-		var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
+		//var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
 		var myChart = new JSChart('graph', 'bar');
 		myChart.setDataArray(myData);
 		myChart.colorizeBars(colors);
-		myChart.setTitle('近7天业绩 （万元）');
+		myChart.setTitle('近期业绩 （万元）');
 		myChart.setTitleColor('#8E8E8E');
 		myChart.setAxisNameX('日期');
 		myChart.setAxisNameY('业绩');
@@ -81,11 +96,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	}).
 				error(function() { alert("网络有问题，请联系网管！"); });
-	
-
-
+				
+				};
+	$(document).ready(function(){
+		fun_day(7);
+		$("#btn7").click(function(){fun_day($(this).attr("value"))});
+		$("#btn15").click(function(){fun_day($(this).attr("value"))});
+		$("#btn20").click(function(){fun_day($(this).attr("value"))});
 	});
 </script>
-
+       	<a href="" id="btn7" class="btn7"  data-role="button" value="7">最近7天</a>
+       	<a href="" id="btn15"  class="btn15" data-role="button" value="15">15天</a>
+       	<a href="" id="btn20"  class="btn20" data-role="button" value="20">20天</a>
 </body>
+
 </html>

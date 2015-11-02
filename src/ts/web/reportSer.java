@@ -33,8 +33,9 @@ public class reportSer extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 
+		String strDay = request.getParameter("day");
 		// 返回最近7天业绩
-		list = dao.findAll(7);
+		list = dao.findAll(Integer.parseInt(strDay));
 		// 转换为json传至页面
 		JSONArray json = JSONArray.fromObject(list);
 		response.getWriter().write(json.toString());
