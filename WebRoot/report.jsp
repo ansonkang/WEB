@@ -52,28 +52,38 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 					function (data) {
 					//字符串转JSON
 					var temp=eval("("+data+")");
-					
-					//var myData = new Array(['周一', 0], ['周二',0,], ['周三', 0], ['周四', 0], ['周五', 0], ['周六', 0], ['周日', 0]);
+
 					var myData=new Array();
 					var colors=new Array();
 		for(var i=0;i<temp.length;i++)
 		{
-			colors[i]='#FA5E1F';
+			colors[i]='#7CBD0F';
+			
+
 			var arr=new Array();
-			arr[0]=temp[i].date.date.toString();
+			arr[0]=temp[i].date.date.toString();//+'\n'+temp[i].week.toString()
 			arr[1]=temp[i].amount;
 			myData[i]=arr;
 			
 		}
-	
-		//var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
+
 		var myChart = new JSChart('graph', 'bar');
 		myChart.setDataArray(myData);
+		//设置点击弹出提示
+		for(var j=0;j<temp.length;j++)
+		{
+			myChart.setTooltip([temp[j].date.date.toString(), temp[j].week.toString()]);
+		}
+		
+		myChart.setTooltipPosition('ne');//N北  e东  右上
+		
 		myChart.colorizeBars(colors);
 		myChart.setTitle('近期业绩 （万元）');
 		myChart.setTitleColor('#8E8E8E');
-		myChart.setAxisNameX('日期');
+		myChart.setAxisNameX('');
 		myChart.setAxisNameY('业绩');
+		//倾斜度
+		//myChart.setAxisValuesAngle(30);
 		myChart.setAxisColor('#C4C4C4');
 		myChart.setAxisNameFontSize(16);
 		myChart.setAxisNameColor('#999');
