@@ -52,9 +52,11 @@ public class personSer extends HttpServlet {
 	String msgByNum(String msg) {
 		// 输入工号返回信息
 		PersonDAO dao = new PersonDAO();
-		String str = "";
-
-		if (msg.length() == 6)// 输入的是工号
+		String str = "查无信息!";
+		if (msg == null || "".equals(msg)) {
+			str = "请输入工号或姓名！";
+			return str;
+		} else if (msg.length() == 6)// 输入的是工号
 		{
 			list = dao.findByNum(msg);
 		} else if (msg.subSequence(0, 1).equals("*"))
@@ -71,6 +73,8 @@ public class personSer extends HttpServlet {
 		System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
 			person = (Person) list.get(i);
+			if (i == 0)
+				str = "";
 			str += person.getNum() + ";" + person.getName() + ";"
 					+ person.getDateE() + ";" + "<br/>";
 		}

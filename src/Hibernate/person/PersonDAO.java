@@ -107,7 +107,7 @@ public class PersonDAO extends BaseHibernateDAO {
 	public List findAll() {
 		log.debug("finding all Person instances");
 		try {
-			String queryString = "from Person";
+			String queryString = "from Person order by num desc";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -154,7 +154,7 @@ public class PersonDAO extends BaseHibernateDAO {
 		// TODO Auto-generated method stub
 		log.debug("finding Person instance with property: name");
 		try {
-			String queryString = "from Person as model where model.name like ?";
+			String queryString = "from Person as model where model.name like ? order by num desc";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, "%" + msg + "%");
 			return queryObject.list();

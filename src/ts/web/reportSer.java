@@ -27,6 +27,10 @@ public class reportSer extends HttpServlet {
 	List list = null;
 	String str = null;
 
+	static void main(String[] args) {
+
+	}
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,5 +44,11 @@ public class reportSer extends HttpServlet {
 		JSONArray json = JSONArray.fromObject(list);
 		response.getWriter().write(json.toString());
 	}
+	// void proc(){
+	// Query q=session.createSQLQuery("{call proc2(?,?)}");
+	// CallableStatement cs = session.connection().prepareCall("{proc2(?,?)}");
+	// cs.setString(1,"23");
+	// cs.registerOutParameter(2, Types.INTEGER);
+	// }
 
 }
