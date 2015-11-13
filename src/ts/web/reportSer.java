@@ -1,6 +1,9 @@
 package ts.web;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +18,7 @@ import org.hibernate.Transaction;
 
 import Hibernate.HibernateSessionFactory;
 import Hibernate.sales.SalesDAO;
+import Hibernate.sales_brand.SalesBrandDAO;
 
 public class reportSer extends HttpServlet {
 
@@ -24,11 +28,11 @@ public class reportSer extends HttpServlet {
 	Session session = HibernateSessionFactory.getSession();
 	Transaction ts = session.beginTransaction();
 	SalesDAO dao = new SalesDAO();
+	SalesBrandDAO brandDao = new SalesBrandDAO();
 	List list = null;
 	String str = null;
 
 	static void main(String[] args) {
-
 	}
 
 	@Override
@@ -36,19 +40,26 @@ public class reportSer extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=utf-8");
-
 		String strDay = request.getParameter("day");
+		String strType = request.getParameter("type");
+
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+		DateFormat df = new SimpleDateFormat("yyyyMMdd");
+		String strDate = df.format(cal.getTime());
+
+		System.out.println(strDate);
 		// 返回最近7天业绩
-		list = dao.findAll(Integer.parseInt(strDay));
+		if ("bar".equals(strType))
+			list = dao.findAll(Integer.parseInt(strDay));
+		// 获取最后一天品牌业绩
+		if ("pie".equals(strType)) {
+			list = brandDao.findByDate(strDate, 5);
+		}
+
 		// 转换为json传至页面
 		JSONArray json = JSONArray.fromObject(list);
 		response.getWriter().write(json.toString());
 	}
-	// void proc(){
-	// Query q=session.createSQLQuery("{call proc2(?,?)}");
-	// CallableStatement cs = session.connection().prepareCall("{proc2(?,?)}");
-	// cs.setString(1,"23");
-	// cs.registerOutParameter(2, Types.INTEGER);
-	// }
 
 }

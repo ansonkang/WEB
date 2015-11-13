@@ -31,17 +31,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/jscharts.js"></script>
 
 <style>
-    *{margin: 0;padding: 0;}
-    .lanren ul a{font-family: '微软雅黑';font-size: 14px;color: #333;text-decoration: none;}
-    .lanren ul a:hover{color: #000;text-decoration: none;}
-    .lanren ul li{width: 100px;height: 35px;line-height: 35px;text-align: center;position: relative;}
-    .lanren ul li:hover{background: #c1c1c1;}
-    .lanren ul{width: 100px;height: auto;position: absolute;background: #DADADA;list-style: none;}
-
-    .lanren ul.nav2{left: 99px;top: 0;display: none;}
-    .lanren ul.nav3{left: 99px;top: 0;display: none;}
-    .lanren .nav1 .li1:hover ul.nav2{display: block;background: #c1c1c1;}
-    .lanren .nav2 .li2:hover ul.nav3{display: block;background: #c1c1c1;}
+*{margin:0;padding:0;list-style-type:none;}
+.body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+.btn7{position:absolute;left:1px;top:104px;width:10px;height:30px;cursor:pointer;}
+.btn15{position:absolute;left:1px;top:134px;width:10px;height:30px;cursor:pointer;}
+.btn20{position:absolute;left:1px;top:164px;width:10px;height:30px;cursor:pointer;}
 </style>
 
 </head>
@@ -59,16 +53,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 		function fun_day(day){						
-		$.post("./servlet/reportSer",{day:day},
+		$.post("./servlet/reportSer",{type:"bar",day:day},
 					function (data) {
 						fun_bar(data);
 	}).
 				error(function() { alert("网络有问题，请联系网管！"); });
 				
 				};
+		//点击红圈时触发
 		function click(){
-			fun_pie();
-	};
+				$.post("./servlet/reportSer",{type:"pie",day:2},
+					function (data) {fun_pie(data);}).
+				error(function() { alert("网络有问题，请联系网管！"); });
+				
+				};
 	
 	//柱状图
 	function fun_bar(data){
@@ -126,26 +124,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		myChart.draw();
 		};
 	//大饼图
-	function fun_pie(){
+	function fun_pie(data){
+	
+							//字符串转JSON
+					var temp=eval("("+data+")");
+
+					var myData=new Array();
+					var colors=new Array();
+		for(var i=0;i<temp.length;i++)
+		{
+			colors[i]='#7CBD0F';
+			
+
+			var arr=new Array();
+			arr[0]=temp[i].id.brand.toString();
+			arr[1]=temp[i].id.amount;
+			myData[i]=arr;
+			
+		}
+
 		var myChart_pie = new JSChart('graph', 'pie');
-		myChart_pie.setDataArray([['A', 40],['B', 16],['C', 20],['D', 10],['E', 10],['F', 4]]);
-		myChart_pie.colorize(['#99CDFB','#3366FB','#0000FA','#F8CC00','#F89900','#F76600']);
+		myChart_pie.setDataArray(myData);
+		//myChart_pie.setDataArray([['A', 40],['B', 16],['C', 20],['D', 10],['E', 10],['F', 4]]);
+		//myChart_pie.colorize(['#99CDFB','#3366FB','#0000FA','#F8CC00','#F89900','#F76600']);
 		myChart_pie.setSize(600, 300);
-		myChart_pie.setTitle('Phd Reference Chart');
+		myChart_pie.setTitle('前5品牌贡献率');
 		myChart_pie.setTitleFontFamily('Times New Roman');
 		myChart_pie.setTitleFontSize(14);
 		myChart_pie.setTitleColor('#0F0F0F');
 		myChart_pie.setPieRadius(95);
 		myChart_pie.setPieValuesColor('#FFFFFF');
 		myChart_pie.setPieValuesFontSize(9);
-		myChart_pie.setPiePosition(180, 165);
-		myChart_pie.setShowXValues(false);
-		myChart_pie.setLegend('#99CDFB', 'Papers where authors found');
-		myChart_pie.setLegend('#3366FB', 'Papers which cite from other articles');
-		myChart_pie.setLegend('#0000FA', 'Papers which cite from news');
-		myChart_pie.setLegend('#F8CC00', 'Papers which lack crucial');
-		myChart_pie.setLegend('#F89900', 'Papers with different conclusion');
-		myChart_pie.setLegend('#F76600', 'Papers with useful information');
+		myChart_pie.setPiePosition(300, 165);
+		//myChart_pie.setShowXValues(false);
+		//设置副标题
+		//myChart_pie.setLegend('#99CDFB', 'Papers where authors found');
+		//myChart_pie.setLegend('#3366FB', 'Papers which cite from other articles');
+		//myChart_pie.setLegend('#0000FA', 'Papers which cite from news');
+		//myChart_pie.setLegend('#F8CC00', 'Papers which lack crucial');
+		//myChart_pie.setLegend('#F89900', 'Papers with different conclusion');
+		//myChart_pie.setLegend('#F76600', 'Papers with useful information');
 		myChart_pie.setLegendShow(true);
 		myChart_pie.setLegendFontFamily('Times New Roman');
 		myChart_pie.setLegendFontSize(10);
@@ -155,27 +173,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		myChart_pie.draw();
 		};
 </script>
-	<div class="lanren">
+	<div class="div">
 	<ul class="nav1">
-	    <li c><a id="btn7" value="7">近7天</a>
-	       <!--
-	       <ul class="nav2">
-	            <li class="li2"><a href="#">二级导航</a></li>
-	            <li class="li2"><a href="#">二级导航</a>
-	                <ul class="nav3">
-	                    <li class="li3"><a href="#">三级导航</a></li>
-	                    <li class="li3"><a href="#">三级导航</a></li>
-	                    <li class="li3"><a href="#">三级导航</a></li>
-	                    <li class="li3"><a href="#">三级导航</a></li>
-	                </ul>
-	            </li>
-	            <li class="li2"><a href="#">二级导航</a></li>
-	            <li class="li2"><a href="#">二级导航</a></li>
-	        </ul> 
-	         --> 
-	    </li>
-	    <li ><a  id="btn15" value="15">近15天</a></li>
-	    <li ><a  id="btn20" value="20">近20天</a></li>
+		<li href="" id="btn7" class="btn7"  data-role="button" value="7">最近7天</li>
+       	<li href="" id="btn15"  class="btn15" data-role="button" value="15">15天</li>
+       	<li href="" id="btn20"  class="btn20" data-role="button" value="20">20天</li>
 	</ul>
 </div>
 </body>
